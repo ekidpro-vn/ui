@@ -24,6 +24,6 @@ to: packages/ui.<%= name %>/package.json
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "rollup -c",
-    "watch": "tsc -b -w --preserveWatchOutput"
+    "storybook": "start-storybook -p 6006"
   }
 }
