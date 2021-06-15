@@ -36,7 +36,8 @@
   "scripts": {
     "bootstrap": "npx lerna bootstrap",
     "clean": "npx lerna run --parallel clean",
-    "release": "npx lerna publish",
+    "build": "npx lerna run --parallel build",
+    "release": "yarn build && npx lerna publish",
     "new-package": "npx hygen package new"
   }
 }

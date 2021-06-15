@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "declarationDir": "lib/types",
+    "paths": {
+      "@ekidpro/ui.button": ["../packages/ui.button"],
+      "@ekidpro/ui.portlet": ["../packages/ui.portlet"],
+      "@ekidpro/ui.textfield": ["../packages/ui.textfield"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "__tests__", "lib"]
+}
