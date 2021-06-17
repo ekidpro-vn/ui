@@ -15,3 +15,11 @@
 # Start new package with current template
 
 `yarn new-package`
+
+# Build all packages
+
+`yarn build`
+
+# Release ( all packages will be built before they can submit to npmjs.com )
+
+`yarn publish`

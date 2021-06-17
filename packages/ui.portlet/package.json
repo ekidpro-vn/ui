@@ -1,10 +1,13 @@
 {
-  "name": "@ekidpro/ui",
+  "name": "@ekidpro/ui.portlet",
   "version": "0.0.2",
   "description": "> TODO: description",
   "author": "lamlv <lam.luongvan2305@gmail.com>",
   "homepage": "",
   "license": "ISC",
+  "main": "lib/index.js",
+  "module": "lib/index.es.js",
+  "types": "lib/types/index.d.ts",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -12,21 +15,16 @@
   "files": [
     "lib"
   ],
-  "main": "lib/index.js",
-  "module": "lib/index.es.js",
-  "types": "lib/types/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "build": "rollup -c",
-    "clean": "rm -rf lib"
+    "clean": "rm -rf lib",
+    "storybook": "start-storybook -p 6006"
   },
   "dependencies": {
-    "@ekidpro/ui.button": "0.0.2",
-    "@ekidpro/ui.portlet": "0.0.2",
-    "@ekidpro/ui.textfield": "0.0.2",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
