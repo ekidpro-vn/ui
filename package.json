@@ -37,7 +37,14 @@
     "bootstrap": "npx lerna bootstrap",
     "clean": "npx lerna run --parallel clean",
     "build": "npx lerna run --parallel build",
-    "release": "yarn build && npx lerna publish",
+    "release": "yarn clean & yarn build && npx lerna publish",
     "new-package": "npx hygen package new"
-  }
+  },
+  "eslintIgnore": [
+    "node_modules",
+    "build",
+    "deploy",
+    "public",
+    "scripts"
+  ]
 }

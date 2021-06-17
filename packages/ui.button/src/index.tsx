@@ -1,3 +1,3 @@
-export function Component() {
+export function Button() {
   return <div>Default Component</div>;
 }

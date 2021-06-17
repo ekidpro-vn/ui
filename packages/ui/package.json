@@ -20,6 +20,16 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "clean": "rm -rf lib"
+  },
+  "dependencies": {
+    "@ekidpro/ui.button": "0.0.2",
+    "@ekidpro/ui.portlet": "0.0.2",
+    "@ekidpro/ui.textfield": "0.0.2",
+    "clsx": "^1.1.1"
+  },
+  "devDependencies": {
+    "@types/react-dom": "^17.0.7"
   }
 }

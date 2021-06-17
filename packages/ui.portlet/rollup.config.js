@@ -44,4 +44,7 @@ export default {
     terser(),
   ],
   external: Object.keys(globals),
+  watch: {
+    include: "src/**",
+  },
 };

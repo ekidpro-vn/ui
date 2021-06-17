@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 export const Portlet: React.FC = (props) => {
   const { children } = props;
