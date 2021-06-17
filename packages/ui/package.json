@@ -1,6 +1,6 @@
 {
   "name": "@ekidpro/ui",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "> TODO: description",
   "author": "lamlv <lam.luongvan2305@gmail.com>",
   "homepage": "",
@@ -24,9 +24,9 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@ekidpro/ui.button": "0.0.2",
-    "@ekidpro/ui.portlet": "0.0.2",
-    "@ekidpro/ui.textfield": "0.0.2",
+    "@ekidpro/ui.button": "^0.0.4",
+    "@ekidpro/ui.portlet": "^0.0.4",
+    "@ekidpro/ui.textfield": "^0.0.4",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
