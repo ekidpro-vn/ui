@@ -9,7 +9,7 @@ const packageJson = require('./package.json');
 const basePackage = require('../../package.json');
 
 export default {
-  input: 'src/index.ts',
+  input: 'src/index.tsx',
   output: [
     {
       file: packageJson.main,

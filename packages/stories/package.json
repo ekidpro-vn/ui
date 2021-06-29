@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "node .storybook/build-tailwind.js && start-storybook -p 6006",
     "storybook:export": "build-storybook"
   },
   "author": "",
@@ -15,6 +15,8 @@
     "clsx": "^1.1.1"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^6.3.1",
+    "@storybook/react": "^6.3.1",
     "@types/react-dom": "^17.0.7"
   }
 }
