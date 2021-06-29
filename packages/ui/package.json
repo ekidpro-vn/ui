@@ -1,6 +1,6 @@
 {
   "name": "@ekidpro/ui",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "> TODO: description",
   "author": "lamlv <lam.luongvan2305@gmail.com>",
   "homepage": "",
@@ -24,10 +24,10 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@ekidpro/ui.button": "*",
-    "@ekidpro/ui.portlet": "*",
-    "@ekidpro/ui.textfield": "*",
-    "@ekidpro/ui.modal": "*",
+    "@ekidpro/ui.button": "^0.0.6",
+    "@ekidpro/ui.modal": "^0.0.6",
+    "@ekidpro/ui.portlet": "^0.0.6",
+    "@ekidpro/ui.textfield": "^0.0.6",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
