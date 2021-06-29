@@ -14,13 +14,14 @@
     "@babel/preset-typescript": "^7.13.0",
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
-    "@storybook/react": "^6.3.0-beta.7",
     "@types/react": "^17.0.9",
     "babel-loader": "^8.2.2",
     "babel-preset-react-app": "^10.0.0",
     "eslint": "^7.27.0",
     "lerna": "^4.0.0",
     "prettier": "^2.3.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "rollup": "^2.50.5",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-terser": "^7.0.2",
@@ -29,9 +30,10 @@
     "tslib": "^2.2.0",
     "typescript": "^4.3.2"
   },
-  "dependencies": {
+  "peerDependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "tailwindcss": "^2.2.4"
   },
   "scripts": {
     "bootstrap": "npx lerna bootstrap",

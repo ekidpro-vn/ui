@@ -1,50 +1,46 @@
-import commonjs from "@rollup/plugin-commonjs";
-import resolve from "@rollup/plugin-node-resolve";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
-import { terser } from "rollup-plugin-terser";
-import typescript from "rollup-plugin-typescript2";
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import { terser } from 'rollup-plugin-terser';
+import typescript from 'rollup-plugin-typescript2';
 
 // this override is needed because Module format cjs does not support top-level await
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const packageJson = require("./package.json");
-
-const globals = {
-  ...packageJson.devDependencies,
-};
+const packageJson = require('./package.json');
+const basePackage = require('../../package.json');
 
 export default {
-  input: "src/index.tsx",
+  input: 'src/index.tsx',
   output: [
     {
       file: packageJson.main,
-      format: "cjs", // commonJS
+      format: 'cjs', // commonJS
       sourcemap: true,
     },
     {
       file: packageJson.module,
-      format: "esm", // ES Modules
+      format: 'esm', // ES Modules
       sourcemap: true,
     },
   ],
   plugins: [
-    peerDepsExternal(),
     resolve(),
-    commonjs(),
     typescript({
       useTsconfigDeclarationDir: true,
       tsconfigOverride: {
-        compilerOptions: { module: "es2015" },
-        exclude: ["**/*.stories.*"],
+        compilerOptions: { module: 'es2015' },
+        exclude: ['**/*.stories.*'],
       },
     }),
     commonjs({
-      exclude: "node_modules",
+      exclude: 'node_modules',
       ignoreGlobal: true,
     }),
     terser(),
   ],
-  external: Object.keys(globals),
-  watch: {
-    include: "src/**",
-  },
+  external: [
+    ...Object.keys(packageJson.dependencies || {}),
+    ...Object.keys(packageJson.peerDependencies || {}),
+    ...Object.keys(basePackage.dependencies || {}),
+    ...Object.keys(basePackage.peerDependencies || {}),
+  ],
 };
