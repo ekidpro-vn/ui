@@ -14,11 +14,12 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - run: |
-          yarn bootstrap
           yarn clean
-          yarn build
+          npx lerna bootstrap --ignore @ekidpro/ui
+          npx lerna run --parallel build --ignore @ekidpro/ui
+          npx lerna bootstrap
+          npx lerna --scope @ekidpro/ui run build
           npx lerna version --yes
-          npx lerna publish patch --yes
-      - run: yarn publish --access public
+      - run: npx lerna publish patch --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
