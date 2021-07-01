@@ -6,4 +6,6 @@ export type ModalProps = {
   title?: string;
   preventClickOutsideToClose?: boolean;
   children?: React.ReactNode;
+  size?:'sm' | 'md' | 'lg',
+  center?:boolean
 };
