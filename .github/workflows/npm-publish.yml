@@ -1,0 +1,25 @@
+name: Publish
+on:
+  push:
+    branches:
+      - master
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+
+      - run: |
+          yarn clean
+          npx lerna bootstrap --ignore @ekidpro/ui
+          npx lerna run --parallel build --ignore @ekidpro/ui
+          npx lerna bootstrap
+          npx lerna --scope @ekidpro/ui run build
+          npx lerna version --yes
+      - run: npx lerna publish patch --yes
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
