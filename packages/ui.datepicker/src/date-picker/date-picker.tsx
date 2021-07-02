@@ -14,7 +14,7 @@ export function DatePicker({ month, year, mode = 'single' }: DatePickerProps) {
   } = useMemo(() => {
     let currentDay: dayjs.Dayjs = dayjs().startOf('month');
     if (typeof month !== 'undefined' && typeof year !== 'undefined') {
-      currentDay = dayjs(`01/${month}/${year}`, `DD/MM/YYYY`).startOf('month');
+      currentDay = dayjs(`${year}-${month}-01`, `YYYY-MM-DD`).startOf('month');
     }
 
     const blankValue = [...Array(currentDay.day()).keys()].map(() => null);
@@ -30,7 +30,7 @@ export function DatePicker({ month, year, mode = 'single' }: DatePickerProps) {
         return;
       }
 
-      const key = `${day}/${currentMonth}/${currentYear}`;
+      const key = `${currentYear}-${currentMonth}-${day}`;
 
       if (mode === 'single') {
         action({ ...state, selected: [key] });
@@ -62,39 +62,39 @@ export function DatePicker({ month, year, mode = 'single' }: DatePickerProps) {
   );
 
   return (
-    <div className="grid grid-cols-7 gap-2 bg-white w-64">
+    <div className="grid grid-cols-7 bg-white w-56">
       {weekDays.map((val, index) => {
         return (
           <div key={`date_picker_${val}_${index}`} className="flex bg-white w-8 h-8 rounded-full">
-            <span className="m-auto text-sm text-gray-400">{val}</span>
+            <span className="m-auto text-xs text-gray-400">{val}</span>
           </div>
         );
       })}
-      {daysOfMonth.map((val, index) => {
-        const selected = state.selected.includes(`${val}/${currentMonth}/${currentYear}`);
-        const isBetween =
-          state.selected.length === 2
-            ? dayjs(`${val}/${currentMonth}/${currentYear}`).isBetween(state.selected[0], state.selected[1])
-            : false;
+      {daysOfMonth.map((val) => {
+        const key = `${currentYear}-${currentMonth}-${val}`;
+        const selected = state.selected.includes(key);
 
-        console.log(80, isBetween);
+        let isBetween = false;
+        if (mode === 'range' && state.selected.length === 2) {
+          isBetween = dayjs(key).isBetween(state.selected[0], state.selected[1]);
+        }
 
         return (
           <div
-            key={`date_picker_${val}_${index}`}
+            key={`date_picker_${key}_${isBetween}`}
             className={Object.entries({
-              'transition-all duration-300 flex w-8 h-8 cursor-pointer': true,
+              'transition-all duration-100 flex w-8 h-8 cursor-pointer': true,
+              'rounded-md': selected,
               'bg-blue-600 text-white': selected,
-              'bg-white text-gray-800': !selected,
-              'rounded-full': selected,
-              'bg-blue-600': isBetween,
+              'bg-white text-gray-800': !selected && !isBetween,
+              'bg-clip-content pt-1 pb-1 text-white bg-blue-300': isBetween,
             })
               .map((o) => (o[1] ? o[0] : null))
               .filter((o) => o !== null)
               .join(' ')}
             onClick={() => onClick(val)}
           >
-            <span className={`m-auto text-sm select-none`}>{val}</span>
+            <span className={`m-auto text-sm select-none ${selected ? 'font-bold' : ''}`}>{val}</span>
           </div>
         );
       })}
