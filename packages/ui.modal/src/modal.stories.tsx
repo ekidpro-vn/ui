@@ -53,10 +53,10 @@ PreventClickOutside.args = {
 export const PositionModal = DefaultModal.bind({})
 PositionModal.storyName = "Position for modal"
 PositionModal.args = {
-  center:true,
+  center: true,
 }
 
 export const SizeModal = DefaultModal.bind({})
 SizeModal.args = {
-  size:'sm'
+  size: 'sm'
 }

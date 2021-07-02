@@ -10,4 +10,3 @@ export const getModalSize = (size?: string): string => {
       return 'max-w-lg';
   }
 };
-
