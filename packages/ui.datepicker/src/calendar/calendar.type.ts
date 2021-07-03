@@ -1,5 +1,3 @@
-export type DatePickerProps = {
-  month?: number;
-  year?: number;
-  mode?: 'single' | 'multi' | 'range'; // default = single
-};
+import dayjs from '../context/parser';
+
+export type DatePickerProps = { day: dayjs.Dayjs; mode: 'single' | 'multi' | 'range' };
