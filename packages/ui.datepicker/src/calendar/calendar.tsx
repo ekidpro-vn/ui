@@ -1,9 +1,13 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { DateContextProps, DatePickerContext, UpdatePickerContext } from '../context/date-context';
 import dayjs from '../context/parser';
-import { DatePickerProps } from './date-picker.type';
+import { DatePickerProps } from './calendar.type';
 
-export function DatePicker({ month, year, mode = 'single' }: DatePickerProps) {
+function arrayWith(numberOfItems: number) {
+  return [...Array(numberOfItems).keys()];
+}
+
+export function Calendar({ month, year, mode = 'single' }: DatePickerProps) {
   const state = useContext(DatePickerContext);
   const action = useContext(UpdatePickerContext);
   const {
@@ -13,13 +17,26 @@ export function DatePicker({ month, year, mode = 'single' }: DatePickerProps) {
     year: currentYear,
   } = useMemo(() => {
     let currentDay: dayjs.Dayjs = dayjs().startOf('month');
-    if (typeof month !== 'undefined' && typeof year !== 'undefined') {
-      currentDay = dayjs(`${year}-${month}-01`, `YYYY-MM-DD`).startOf('month');
+
+    if (typeof month !== 'undefined' || typeof year !== 'undefined') {
+      const dayPattern = [year ?? currentDay.year(), month ?? currentDay.month() + 1, 1]
+        .map((n, index) => {
+          if (index === 0) {
+            return String(n).padStart(4, '0');
+          }
+
+          return String(n).padStart(2, '0');
+        })
+        .join('-');
+
+      console.log(333, dayPattern);
+
+      currentDay = dayjs(dayPattern, `YYYY-MM-DD`).startOf('month');
     }
 
-    const blankValue = [...Array(currentDay.day()).keys()].map(() => null);
-    const days = [...Array(currentDay.daysInMonth()).keys()].map((_, index) => index + 1);
-    const weekDays = [...Array(7).keys()].map((_, index) => currentDay.isoWeekday(index).format('ddd'));
+    const blankValue = arrayWith(currentDay.day()).map(() => null);
+    const days = arrayWith(currentDay.daysInMonth()).map((_, index) => index + 1);
+    const weekDays = arrayWith(7).map((_, index) => currentDay.isoWeekday(index).format('ddd'));
 
     return { weekDays, daysOfMonth: [...blankValue, ...days], month: currentDay.month(), year: currentDay.year() };
   }, [month, year]);
@@ -70,8 +87,8 @@ export function DatePicker({ month, year, mode = 'single' }: DatePickerProps) {
           </div>
         );
       })}
-      {daysOfMonth.map((val) => {
-        const key = `${currentYear}-${currentMonth}-${val}`;
+      {daysOfMonth.map((val, index) => {
+        const key = `${currentYear}-${currentMonth}-${val ?? `blank_${index}`}`;
         const selected = state.selected.includes(key);
 
         let isBetween = false;
@@ -102,13 +119,13 @@ export function DatePicker({ month, year, mode = 'single' }: DatePickerProps) {
   );
 }
 
-export function DatePickerControlled(props: DatePickerProps) {
+export function CalendarControlled(props: DatePickerProps) {
   const [state, setState] = useState<DateContextProps>({ selected: [] });
 
   return (
     <UpdatePickerContext.Provider value={setState}>
       <DatePickerContext.Provider value={state}>
-        <DatePicker {...props} />
+        <Calendar {...props} />
       </DatePickerContext.Provider>
     </UpdatePickerContext.Provider>
   );

@@ -1,14 +1,14 @@
 import { Meta, Story } from '@storybook/react';
 import React, { ComponentProps } from 'react';
-import { DatePickerControlled as DatePicker } from './date-picker';
+import { CalendarControlled } from './calendar';
 
 export default {
-  title: 'Date picker',
-  component: DatePicker,
+  title: 'Calendar',
+  component: CalendarControlled,
 } as Meta;
 
-const DatePickerComponent: Story<ComponentProps<typeof DatePicker>> = (args: any) => {
-  return <DatePicker {...args} />;
+const DatePickerComponent: Story<ComponentProps<typeof CalendarControlled>> = (args: any) => {
+  return <CalendarControlled {...args} />;
 };
 
 export const DefaultComponent = DatePickerComponent.bind({});
@@ -26,3 +26,4 @@ DateRangePicker.storyName = 'Date range picker';
 DateRangePicker.args = {
   mode: 'range',
 };
+

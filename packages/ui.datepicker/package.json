@@ -25,6 +25,10 @@
     "storybook": "start-storybook -p 6006"
   },
   "devDependencies": {
+    "@popperjs/core": "^2.9.2",
     "dayjs": "^1.10.5"
+  },
+  "peerDependencies": {
+    "@popperjs/core": "^2.9.2"
   }
 }
