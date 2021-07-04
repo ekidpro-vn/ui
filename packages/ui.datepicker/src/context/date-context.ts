@@ -1,7 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
 export type DateContextProps = {
-  current?: number;
   month?: number;
   year?: number;
   selected: string[];
