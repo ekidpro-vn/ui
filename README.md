@@ -35,15 +35,15 @@ For example:
 
 `npx lerna --scope @ekidpro/ui.button add -D @types/abcxyz`
 
-run lint:
+Run lint:
 
-`npx lerna --scope @ekidpro/ui.modal run lint`
+`npx lerna --scope @ekidpro/<package_name> run lint`
 
-install node modules:
+Install node modules:
 
 `npx lerna bootstrap`
 
-run project
+Run project
 
 `cd packages`
 
@@ -51,5 +51,4 @@ run project
 
 `yarn storybook`
 
-`npx lerna --scope @ekidpro/ui.button add -D @types/abcxyz`
-
+`npx lerna --scope @ekidpro/<package_name> add -D @types/abcxyz`
