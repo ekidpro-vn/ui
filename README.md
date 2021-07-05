@@ -50,3 +50,6 @@ run project
 `cd stories`
 
 `yarn storybook`
+
+`npx lerna --scope @ekidpro/ui.button add -D @types/abcxyz`
+
