@@ -7,8 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "node .storybook/build-tailwind.js && start-storybook -p 6006",
-    "storybook:export": "build-storybook",
-    "deploy-storybook": "storybook-to-ghpages"
+    "buildstorybook": "build-storybook",
+    "deploy-storybook": "rm -fr .out && npm run buildstorybook && echo 'ui.ekidpro.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out"
   },
   "author": "",
   "license": "ISC",
