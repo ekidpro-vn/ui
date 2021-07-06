@@ -49,3 +49,14 @@ PreventClickOutside.storyName = 'Prevent click outside to close modal';
 PreventClickOutside.args = {
   preventClickOutsideToClose: true,
 };
+
+export const PositionModal = DefaultModal.bind({})
+PositionModal.storyName = "Position for modal"
+PositionModal.args = {
+  center: true,
+}
+
+export const SizeModal = DefaultModal.bind({})
+SizeModal.args = {
+  size: 'sm'
+}

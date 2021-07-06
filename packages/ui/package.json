@@ -24,10 +24,11 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@ekidpro/ui.button": "^0.0.6",
-    "@ekidpro/ui.modal": "^0.0.6",
-    "@ekidpro/ui.portlet": "^0.0.6",
-    "@ekidpro/ui.textfield": "^0.0.6",
+    "@ekidpro/ui.button": "*",
+    "@ekidpro/ui.modal": "*",
+    "@ekidpro/ui.portlet": "*",
+    "@ekidpro/ui.textfield": "*",
+    "@ekidpro/ui.datepicker": "*",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
