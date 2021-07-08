@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "node .storybook/build-tailwind.js && start-storybook -p 6006",
     "buildstorybook": "rm -fr storybook-static && build-storybook -s cname",
-    "deploy-storybook": "npm run buildstorybook && storybook-to-ghpages"
+    "deploy-storybook": "npm run buildstorybook && storybook-to-ghpages -e storybook-static"
   },
   "author": "",
   "license": "ISC",

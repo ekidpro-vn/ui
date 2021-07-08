@@ -8,4 +8,5 @@ export type ModalProps = {
   children?: React.ReactNode;
   size?: 'sm' | 'md' | 'lg';
   center?: boolean;
+  zIndex?: number;
 };

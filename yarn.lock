@@ -1303,6 +1303,11 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@ekidpro/ui.modal@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@ekidpro/ui.modal/-/ui.modal-0.0.9.tgz#3f9edf72c0e3b7c79ad22fd892d3c90547b2bc16"
+  integrity sha512-Tec4l8QH/9cqFYVnCnRwDrp3ju0/xL6FPcwYN3mN7+JukctBJr4bxFqp3Ayd9OzPiZkJI7rV4h4KwiUH8awPFA==
+
 "@emotion/cache@^10.0.27":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"

@@ -5,13 +5,14 @@ import { getModalSize } from './modal.size';
 import clsx from 'clsx';
 
 export function Modal(props: ModalProps) {
-  const { show, onClose, preventClickOutsideToClose, title, center, size } = props;
+  const { show, onClose, preventClickOutsideToClose, title, center, size, zIndex } = props;
   const modalSize = getModalSize(size);
   return (
     <Transition appear show={show} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-10 overflow-y-auto"
+        className="fixed inset-0 overflow-y-auto"
+        style={{ zIndex: zIndex ?? 20 }}
         onClose={
           preventClickOutsideToClose
             ? () => {
@@ -32,8 +33,6 @@ export function Modal(props: ModalProps) {
           >
             <Dialog.Overlay className="fixed inset-0 bg-black bg-opacity-40" />
           </Transition.Child>
-
-          {/* This element is to trick the browser into centering the modal contents. */}
           <span className="inline-block h-screen align-middle" aria-hidden="true">
             &#8203;
           </span>
@@ -48,9 +47,9 @@ export function Modal(props: ModalProps) {
           >
             <div
               className={clsx(
-                `${modalSize}`,
-                center && 'align-middle',
-                'inline-block w-full p-6 my-8 overflow-hidden text-left transition-all transform bg-white shadow-xl rounded-2xl'
+                modalSize,
+                { 'align-top': !center },
+                'inline-block w-full p-6 my-8 overflow-visible text-left transition-all transform bg-white shadow-xl rounded-2xl'
               )}
             >
               {title && (
