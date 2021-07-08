@@ -11,7 +11,7 @@ export function Modal(props: ModalProps) {
     <Transition appear show={show} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-20 overflow-y-auto"
+        className="fixed inset-0 overflow-y-auto"
         style={{ zIndex: zIndex ?? 20 }}
         onClose={
           preventClickOutsideToClose
