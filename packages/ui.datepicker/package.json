@@ -1,5 +1,5 @@
 {
-  "name": "@ekidpro/ui.textfield",
+  "name": "@ekidpro/ui.datepicker",
   "version": "0.0.9",
   "description": "> TODO: description",
   "author": "lamlv <lam.luongvan2305@gmail.com>",
@@ -24,10 +24,11 @@
     "clean": "rm -rf lib",
     "storybook": "start-storybook -p 6006"
   },
-  "dependencies": {
-    "clsx": "^1.1.1"
-  },
   "devDependencies": {
-    "@types/react-dom": "^17.0.7"
+    "@popperjs/core": "^2.9.2",
+    "dayjs": "^1.10.5"
+  },
+  "peerDependencies": {
+    "@popperjs/core": "^2.9.2"
   }
 }
