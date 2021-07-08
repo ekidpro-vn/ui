@@ -6,8 +6,10 @@ export type Icon = {
 export type TextFieldProps = {
   className?: string;
   icons?: Icon[];
-  label?: string | any;
+  label?: string;
   required?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 };
 
 export type IconProps = {
@@ -16,5 +18,5 @@ export type IconProps = {
 
 export type LabelProps = {
   required?: boolean;
-  label?: string | any;
+  label?: string;
 };

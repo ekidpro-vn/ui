@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { IconProps, LabelProps, TextFieldProps } from './textfield.types';
 import { css } from './utils/css';
 
@@ -29,23 +29,21 @@ const RenderLabel: React.FC<LabelProps> = (props) => {
     return null;
   }
 
-  if (typeof label === 'string') {
-    return (
-      <div className="mb-1">
-        <span className="font-medium">{label}</span>
-        {required && <span className="text-red-500 ml-1.5">*</span>}
-      </div>
-    );
-  }
-
-  return label;
+  return (
+    <div className="mb-1">
+      <span className="font-medium">{label}</span>
+      {required && <span className="text-red-500 ml-1.5">*</span>}
+    </div>
+  );
 };
 
 const MemoIcon = memo(RenderIcon);
 const MemoLabel = memo(RenderLabel);
 
 export function TextField(props: HTMLInputElement & TextFieldProps) {
-  const { icons, label, required, className, ...inputProps } = props;
+  const { icons, label, required, className, onBlur, onChange, ...inputProps } = props;
+  const [checkInputValue, setCheckInputValue] = useState<boolean>(true);
+  const [valueInput, setValueInput] = useState<string>("")
 
   const leftIcon = icons && icons.length > 0 ? icons.find((item) => item.position === 'left') : undefined;
   const rightIcon = icons && icons.length > 0 ? icons.find((item) => item.position === 'right') : undefined;
@@ -62,6 +60,17 @@ export function TextField(props: HTMLInputElement & TextFieldProps) {
         {leftIcon && <MemoIcon icon={leftIcon} />}
         <input
           {...inputProps}
+          onBlur={(e) => {
+            onBlur && onBlur(e)
+            if (required && !valueInput) {
+              setCheckInputValue(false)
+            }
+          }}
+          onChange={e => {
+            onChange && onChange(e)
+            setCheckInputValue(!!e.target.value)
+            setValueInput(e.target.value)
+          }}
           className={
             css({
               'flex-1 flex items-center rounded overflow-hidden border border-gray-300 px-4 w-full h-full pt-2 pb-2.5 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:border-blue-600 focus:outline-none focus:border-2':
@@ -73,6 +82,7 @@ export function TextField(props: HTMLInputElement & TextFieldProps) {
         />
         {rightIcon && <MemoIcon icon={rightIcon} />}
       </div>
+      {!checkInputValue && required && <span className="block text-red-500">Required</span>}
     </div>
   );
 }
