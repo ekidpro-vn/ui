@@ -1,8 +1,30 @@
+// {
+//   "cSpell.words": [
+//     "clazz",
+//     "clsx",
+//     "portlet",
+//     "tailwindcss"
+//   ]
+// }
+
 {
-  "cSpell.words": [
-    "clazz",
-    "clsx",
-    "portlet",
-    "tailwindcss"
-  ]
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.organizeImports": true
+  },
+  "editor.formatOnSave": true,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "prettier.configPath": ".prettierrc",
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
