@@ -1,13 +1,14 @@
 {
   "name": "stories",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "node .storybook/build-tailwind.js && start-storybook -p 6006",
-    "storybook:export": "build-storybook"
+    "buildstorybook": "rm -fr storybook-static && build-storybook -s cname",
+    "deploy-storybook": "npm run buildstorybook && storybook-to-ghpages -e storybook-static"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,7 @@
   "devDependencies": {
     "@storybook/addon-essentials": "^6.3.1",
     "@storybook/react": "^6.3.1",
+    "@storybook/storybook-deployer": "^2.8.10",
     "@types/react-dom": "^17.0.7"
   }
 }
