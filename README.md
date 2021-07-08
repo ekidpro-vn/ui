@@ -1,5 +1,12 @@
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
+# Install package
+
+`npm i @ekidpro/ui`
+
+# Install each module
+
+`npm i @ekidpro/ui.modal`
 # Add new package
 
 `npx lerna create @ekidpro/ui.<project_name>`

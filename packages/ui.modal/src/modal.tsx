@@ -47,8 +47,8 @@ export function Modal(props: ModalProps) {
             <div
               className={clsx(
                 modalSize,
-                { 'align-middle': center },
-                'inline-block w-full p-6 my-8 overflow-hidden text-left transition-all transform bg-white shadow-xl rounded-2xl'
+                { 'align-top': !center },
+                'inline-block w-full p-6 my-8 overflow-visible text-left transition-all transform bg-white shadow-xl rounded-2xl'
               )}
             >
               {title && (
