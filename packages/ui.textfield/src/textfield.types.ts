@@ -3,20 +3,26 @@ export type Icon = {
   icon: JSX.Element;
 };
 
-export type TextFieldProps = {
-  className?: string;
-  icons?: Icon[];
-  label?: string;
-  required?: boolean;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-};
-
 export type IconProps = {
   icon?: Icon;
 };
 
-export type LabelProps = {
-  required?: boolean;
-  label?: string;
+export type TextFieldGroupProps = {
+  error?: boolean;
 };
+
+export interface TextInputProps extends TextFieldGroupProps {
+  className?: string;
+  icons?: Icon[];
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+}
+
+export interface TextDescriptionProps extends TextFieldGroupProps {
+  content?: string;
+}
+
+export interface TextLabelProps extends TextFieldGroupProps {
+  content: string;
+  required?: boolean;
+}

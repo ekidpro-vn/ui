@@ -1,8 +1,17 @@
-import { memo, useState } from 'react';
-import { IconProps, LabelProps, TextFieldProps } from './textfield.types';
+import { Children, cloneElement, isValidElement, memo, useContext, useState } from 'react';
+import { setErrorValidate } from './context/actions';
+import { TextFieldContext, TextFieldProvider } from './context/context';
+import { TextInputStyle } from './textfield.styles';
+import {
+  IconProps,
+  TextDescriptionProps,
+  TextFieldGroupProps,
+  TextInputProps,
+  TextLabelProps
+} from './textfield.types';
 import { css } from './utils/css';
 
-const RenderIcon: React.FC<IconProps> = (props) => {
+const Icon: React.FC<IconProps> = memo((props) => {
   const { icon } = props;
 
   if (!icon) {
@@ -20,69 +29,97 @@ const RenderIcon: React.FC<IconProps> = (props) => {
       {icon.icon}
     </div>
   );
-};
+});
 
-const RenderLabel: React.FC<LabelProps> = (props) => {
-  const { label, required } = props;
+const TextLabel: React.FC<TextLabelProps> = memo((props) => {
+  const { content, children, required } = props;
 
-  if (!label) {
+  if (children) {
+    return <>{children}</>;
+  }
+
+  if (!content) {
     return null;
   }
 
   return (
     <div className="mb-1">
-      <span className="font-medium">{label}</span>
+      <span className="font-medium">{content}</span>
       {required && <span className="text-red-500 ml-1.5">*</span>}
     </div>
   );
-};
+});
 
-const MemoIcon = memo(RenderIcon);
-const MemoLabel = memo(RenderLabel);
+export const TextInput: React.FC<TextInputProps> = memo((props) => {
+  const { icons, className, onBlur, onChange, error, ...inputProps } = props;
+  const [valueInput, setValueInput] = useState<string>('');
+  const { state, dispatch } = useContext(TextFieldContext);
 
-export function TextField(props: HTMLInputElement & TextFieldProps) {
-  const { icons, label, required, className, onBlur, onChange, ...inputProps } = props;
-  const [checkInputValue, setCheckInputValue] = useState<boolean>(true);
-  const [valueInput, setValueInput] = useState<string>("")
-
-  const leftIcon = icons && icons.length > 0 ? icons.find((item) => item.position === 'left') : undefined;
-  const rightIcon = icons && icons.length > 0 ? icons.find((item) => item.position === 'right') : undefined;
+  const leftIcon = icons?.find((item) => item.position === 'left');
+  const rightIcon = icons?.find((item) => item.position === 'right');
 
   return (
-    <div>
-      <MemoLabel label={label} required={required} />
+    <TextInputStyle>
       <div
         className={css({
           'h-10': true,
           'flex items-center': !!(icons && icons.length > 0),
         })}
       >
-        {leftIcon && <MemoIcon icon={leftIcon} />}
+        {leftIcon && <Icon icon={leftIcon} />}
         <input
           {...inputProps}
           onBlur={(e) => {
-            onBlur && onBlur(e)
-            if (required && !valueInput) {
-              setCheckInputValue(false)
+            onBlur && onBlur(e);
+            if (error && !valueInput && !state?.errorValidate) {
+              dispatch(setErrorValidate(true));
             }
           }}
-          onChange={e => {
-            onChange && onChange(e)
-            setCheckInputValue(!!e.target.value)
-            setValueInput(e.target.value)
+          onChange={(e) => {
+            onChange && onChange(e);
+            state?.errorValidate && dispatch(setErrorValidate(!e.target.value));
+            setValueInput(e.target.value);
           }}
           className={
             css({
-              'flex-1 flex items-center rounded overflow-hidden border border-gray-300 px-4 w-full h-full pt-2 pb-2.5 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:border-blue-600 focus:outline-none focus:border-2':
+              'flex-1 flex items-center rounded overflow-hidden border border-gray-300 px-3 w-full h-full pt-2 pb-2.5 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:border-blue-600 focus:outline-none min-w-12':
                 true,
               'rounded-l-none': !!leftIcon,
               'rounded-r-none': !!rightIcon,
             }) + ` ${className || ''}`
           }
         />
-        {rightIcon && <MemoIcon icon={rightIcon} />}
+        {rightIcon && <Icon icon={rightIcon} />}
       </div>
-      {!checkInputValue && required && <span className="block text-red-500">Required</span>}
-    </div>
+    </TextInputStyle>
   );
-}
+});
+
+const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
+  const { children, content, error } = props;
+  const { state } = useContext(TextFieldContext);
+
+  if (children) {
+    return <div className={state.errorValidate && error ? 'text-red-500' : ''}>{children}</div>;
+  }
+  return <div>{content}</div>;
+});
+
+const TextFieldGroup: React.FC<TextFieldGroupProps> = memo((props) => {
+  const { children, ...childProps } = props;
+
+  const childrenWithProps = Children.map(children, (child) => {
+    if (isValidElement(child)) {
+      return cloneElement(child, { ...childProps });
+    }
+    return child;
+  });
+
+  return <TextFieldProvider>{childrenWithProps}</TextFieldProvider>;
+});
+
+export default Object.assign(TextFieldGroup, {
+  Label: TextLabel,
+  Input: TextInput,
+  Description: TextDescription,
+});
