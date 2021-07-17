@@ -1,11 +1,18 @@
-# `@ekidpro/ui.textfield`
+# `@ekidpro/ui.tooltip`
 
 > TODO: description
 
 ## Usage
 
 ```
-const ui.tooltip = require('@ekidpro/ui.tooltip');
+import { Tooltip } from '@ekidpro/ui';
 
-// TODO: DEMONSTRATE API
+<Tooltip
+  position="top"
+  tooltip={
+    <div>Tooltip content</div>
+  }
+>
+  Hover me
+</Tooltip>
 ```
