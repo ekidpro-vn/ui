@@ -1,6 +1,6 @@
 # `@ekidpro/ui.tooltip`
 
-> TODO: description
+> A tooltip component with Tailwind css
 
 ## Usage
 
