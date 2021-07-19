@@ -48,13 +48,30 @@ export function Modal(props: ModalProps) {
               className={clsx(
                 modalSize,
                 { 'align-top': !center },
-                'inline-block w-full p-6 my-8 overflow-visible text-left transition-all transform bg-white shadow-xl rounded-2xl'
+                'inline-block w-full p-6 my-8 overflow-visible text-left transition-all transform bg-white shadow-xl rounded-xl'
               )}
             >
               {title && (
-                <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                  {title}
-                </Dialog.Title>
+                <div className="flex justify-between items-center">
+                  <Dialog.Title as="h3" className="text-lg font-bold leading-6 text-gray-900">
+                    {title}
+                  </Dialog.Title>
+                  <button
+                    type="button"
+                    className="inline-flex justify-center text-sm font-medium text-blue-900  border border-transparent rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                    onClick={onClose}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 hover:text-blue-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
               )}
               {props.children}
             </div>
