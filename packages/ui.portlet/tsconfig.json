@@ -6,11 +6,5 @@
     "declarationDir": "lib/types"
   },
   "include": ["src/**/*"],
-  "exclude": [
-    "node_modules",
-    "__tests__",
-    "lib",
-    "src/**/*.stories.tsx",
-    "src/**/*.test.tsx"
-  ]
+  "exclude": ["node_modules", "__tests__", "lib"]
 }
