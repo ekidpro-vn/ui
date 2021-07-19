@@ -60,3 +60,8 @@ export const SizeModal = DefaultModal.bind({});
 SizeModal.args = {
   size: 'sm',
 };
+
+export const zIndexModal = DefaultModal.bind({});
+SizeModal.args = {
+  zIndex: 20,
+};

@@ -5,13 +5,14 @@ import { getModalSize } from './modal.size';
 import clsx from 'clsx';
 
 export function Modal(props: ModalProps) {
-  const { show, onClose, preventClickOutsideToClose, title, center, size } = props;
+  const { show, onClose, preventClickOutsideToClose, title, center, size, zIndex } = props;
   const modalSize = getModalSize(size);
   return (
     <Transition appear show={show} as={Fragment}>
       <Dialog
         as="div"
-        className="fixed inset-0 z-10 overflow-y-auto"
+        className="fixed inset-0 overflow-y-auto"
+        style={{ zIndex: zIndex ?? 20 }}
         onClose={
           preventClickOutsideToClose
             ? () => {
