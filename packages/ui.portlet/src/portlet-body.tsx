@@ -1,6 +1,6 @@
-import React from 'react';
+import clsx from 'clsx';
 
-export const PortletBody: React.FC = (props) => {
-  const { children } = props;
-  return <div className="bg-white rounded p-7">{children}</div>;
+export const PortletBody: React.FC<HTMLDivElement> = (props) => {
+  const { children, className } = props;
+  return <div className={clsx(className, 'bg-white rounded')}>{children}</div>;
 };
