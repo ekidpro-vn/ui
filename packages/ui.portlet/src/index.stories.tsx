@@ -26,7 +26,11 @@ DefaultPortlet.args = {
 
 export const PreventPortletHeader = DefaultPortlet.bind({});
 PreventPortletHeader.storyName = 'PortletHeader';
-PreventPortletHeader.args = { title: 'PortletHeader', toolbar: <div>+</div> };
+PreventPortletHeader.args = {
+  title: 'PortletHeader',
+  toolbar: <div>+</div>,
+  subTitle: <div style={{ fontWeight: 'bold', fontSize: '12px' }}>SubTitle</div>,
+};
 
 export const PreventPortletBody = DefaultPortlet.bind({});
 PreventPortletBody.storyName = 'PortletBody';
