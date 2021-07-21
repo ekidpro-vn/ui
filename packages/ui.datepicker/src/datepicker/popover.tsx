@@ -8,13 +8,24 @@ type PopoverProps = {
   month?: number;
   year?: number;
   onChange?: (selected: Date[]) => void;
+  defaultValue?: Date[];
 };
 
 export function Popover(props: PopoverProps) {
-  const { numberOfItems = 2, month, year, onChange } = props;
+  const { numberOfItems = 2, month, year, onChange, defaultValue } = props;
+
+  const defaultV = useMemo(() => {
+    if (!defaultValue) {
+      return [];
+    }
+    return defaultValue.map((e) => {
+      return `${dayjs(e).year()}-${dayjs(e).month()}-${dayjs(e).date()}`;
+    });
+  }, [defaultValue]);
+
   const [state, setState] = useState<DateContextProps>(() => {
     const currentDay = dayjs();
-    return { selected: [], month: month ?? currentDay.month(), year: year ?? currentDay.year() };
+    return { selected: defaultV, month: month ?? currentDay.month(), year: year ?? currentDay.year() };
   });
 
   const { selected } = state;
