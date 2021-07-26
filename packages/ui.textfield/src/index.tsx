@@ -1,3 +1,4 @@
-export function TextField() {
-  return <input name="aa" />;
-}
+import TextFieldGroup from './textfield';
+
+export default TextFieldGroup;
+export { TextInput } from './textfield';
