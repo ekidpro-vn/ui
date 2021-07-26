@@ -13,15 +13,6 @@ const TextInputComponent: Story<ComponentProps<typeof TextFieldGroup>> = (props)
     <div className="w-1/4 mx-4">
       <TextInput {...props} />
     </div>
-    <div className="w-1/4 mx-4">
-      <TextInput {...props} />
-    </div>
-    <div className="w-1/4 mx-4">
-      <TextInput {...props} />
-    </div>
-    <div className="w-1/4 mx-4">
-      <TextInput {...props} />
-    </div>
   </div>
 );
 
@@ -29,10 +20,10 @@ const TextFieldGroupComponent: Story<ComponentProps<typeof TextFieldGroup>> = (p
   <div className="flex items-center justify-center">
     <div className="w-1/4 mx-4">
       <TextFieldGroup error>
-        <TextFieldGroup.Label required content="Họ và tên" />
+        <TextFieldGroup.Label required content="Username" />
         <TextFieldGroup.Input />
         <TextFieldGroup.Description>
-          lỗi
+          <span className="text-red-500">Username is required!</span>
         </TextFieldGroup.Description>
       </TextFieldGroup>
     </div>
