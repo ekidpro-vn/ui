@@ -1,4 +1,1 @@
-import TextFieldGroup from './textfield';
-
-export default TextFieldGroup;
-export { TextInput } from './textfield';
+export { TextFieldGroup, TextInput } from './textfield';

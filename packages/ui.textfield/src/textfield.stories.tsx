@@ -1,7 +1,7 @@
 
 import { Meta, Story } from '@storybook/react';
 import { ComponentProps } from "react";
-import TextFieldGroup, { TextInput } from './index';
+import { TextFieldGroup, TextInput } from './index';
 
 export default {
   title: "TextField",

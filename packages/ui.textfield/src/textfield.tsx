@@ -7,7 +7,7 @@ import {
   TextDescriptionProps,
   TextFieldGroupProps,
   TextInputProps,
-  TextLabelProps
+  TextLabelProps,
 } from './textfield.types';
 import { css } from './utils/css';
 
@@ -105,7 +105,7 @@ const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
   return <div>{content}</div>;
 });
 
-const TextFieldGroup: React.FC<TextFieldGroupProps> = memo((props) => {
+const TextFieldGroupLayout: React.FC<TextFieldGroupProps> = memo((props) => {
   const { children, ...childProps } = props;
 
   const childrenWithProps = Children.map(children, (child) => {
@@ -118,7 +118,7 @@ const TextFieldGroup: React.FC<TextFieldGroupProps> = memo((props) => {
   return <TextFieldProvider>{childrenWithProps}</TextFieldProvider>;
 });
 
-export default Object.assign(TextFieldGroup, {
+export const TextFieldGroup = Object.assign(TextFieldGroupLayout, {
   Label: TextLabel,
   Input: TextInput,
   Description: TextDescription,

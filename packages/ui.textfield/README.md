@@ -1,11 +1,29 @@
 # `@ekidpro/ui.textfield`
 
-> TODO: description
+> A input component with Tailwind css
 
 ## Usage
 
 ```
-const ui.textfield = require('@ekidpro/ui.textfield');
+// TextInput
+import { TextInput } from '@ekidpro/ui';
 
-// TODO: DEMONSTRATE API
+<TextInput/>
+```
+
+```
+// TextInput with label and description
+import { TextFieldGroup } from '@ekidpro/ui';
+
+<TextFieldGroup>
+  <TextFieldGroup.Label>
+    Email
+  <TextFieldGroup.Label/>
+
+  <TextFieldGroup.Input />
+
+  <TextFieldGroup.Description>
+    Ex: example@email.com
+  </TextFieldGroup.Description>
+<TextFieldGroup/>
 ```
