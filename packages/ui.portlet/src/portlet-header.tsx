@@ -1,10 +1,11 @@
+import { forwardRef } from 'react';
 import { PortletHeaderProps } from './portlet.type';
 
-export const PortletHeader: React.FC<PortletHeaderProps> = (props) => {
-  const { title, toolbar, subTitle } = props;
+export const PortletHeader = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & PortletHeaderProps>((props, ref) => {
+  const { title, toolbar, subTitle, className, children, ...rest } = props;
 
   return (
-    <div className="flex items-center justify-between rounded bg-white px-7 py-4 border-b	">
+    <div className={`flex items-center justify-between rounded bg-white px-7 py-4 border-b ${className}`} ref={ref} {...rest}>
       <div>
         <span className="uppercase font-bold">{title}</span>
         <span className="uppercase">{subTitle}</span>
@@ -12,4 +13,4 @@ export const PortletHeader: React.FC<PortletHeaderProps> = (props) => {
       <div>{toolbar}</div>
     </div>
   );
-};
+});
