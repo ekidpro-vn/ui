@@ -9,11 +9,16 @@ export default {
 } as Meta;
 
 const DatePickerComponent: Story<ComponentProps<typeof CalendarControlled>> = (args: any) => {
-  return <CalendarControlled {...args} />;
+  return (
+    <div className="w-full h-full bg-blue-100 flex">
+      <div className="m-auto py-24" style={{ width: 300, backgroundColor: 'red' }}><CalendarControlled {...args} />
+      </div>
+    </div>
+  )
 };
 
 export const DefaultComponent = DatePickerComponent.bind({});
-DefaultComponent.storyName = 'Default date picker without props';
+DefaultComponent.storyName = 'Default';
 DefaultComponent.args = {
   mode: 'single',
   day: dayjs()
@@ -35,3 +40,10 @@ DateRangePicker.args = {
   day: dayjs()
 };
 
+export const TransparentBackground = DatePickerComponent.bind({})
+TransparentBackground.storyName = "Transparent background"
+TransparentBackground.args = {
+  mode: 'single',
+  day: dayjs(),
+  transparent: true
+}

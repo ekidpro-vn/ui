@@ -7,12 +7,13 @@ type PopoverProps = {
   numberOfItems?: number;
   month?: number;
   year?: number;
+  mode?: 'single' | 'multi' | 'range';
   onChange?: (selected: Date[]) => void;
   defaultValue?: Date[];
 };
 
 export function Popover(props: PopoverProps) {
-  const { numberOfItems = 2, month, year, onChange, defaultValue } = props;
+  const { numberOfItems = 2, month, year, onChange, defaultValue, mode = 'range' } = props;
 
   const defaultV = useMemo(() => {
     if (!defaultValue) {
@@ -63,11 +64,9 @@ export function Popover(props: PopoverProps) {
   return (
     <UpdatePickerContext.Provider value={setState}>
       <DatePickerContext.Provider value={state}>
-        <div className="flex flex-row p-5 shadow-lg rounded-md space-x-5">
-          {items.map((val) => (
-            <Calendar key={val.toString()} day={val} mode="range" />
-          ))}
-        </div>
+        {items.map((val) => (
+          <Calendar key={val.toString()} day={val} mode={mode} />
+        ))}
       </DatePickerContext.Provider>
     </UpdatePickerContext.Provider>
   );
