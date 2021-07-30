@@ -1,4 +1,4 @@
-import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 import { DateContextProps, DatePickerContext, UpdatePickerContext } from '../context/date-context';
 import dayjs from '../context/parser';
 import { css } from '../utils/css';
@@ -13,9 +13,6 @@ export function Calendar(props: CalendarProps) {
   const { day, mode, transparent = false } = props;
 
   const [showMonthSelection, setShowMonthSelection] = useState(false);
-
-  const datePickerPanel = useRef<HTMLDivElement>(null);
-  const [datePickerPanelHeight, updateDatePickerPanelHeight] = useState<number>(0);
 
   const state = useContext(DatePickerContext);
   const action = useContext(UpdatePickerContext);
@@ -85,13 +82,6 @@ export function Calendar(props: CalendarProps) {
     }
   }, [action]);
 
-  useEffect(() => {
-    if (datePickerPanel.current) {
-      const height = datePickerPanel.current.getBoundingClientRect().height;
-      updateDatePickerPanelHeight(height);
-    }
-  }, [datePickerPanel]);
-
   return (
     <div
       className={css({
@@ -123,7 +113,10 @@ export function Calendar(props: CalendarProps) {
             </g>
           </svg>
         </button>
-        <div className="m-auto cursor-pointer hover:text-blue-600" onClick={() => setShowMonthSelection((val) => !val)}>
+        <div
+          className="m-auto cursor-pointer hover:text-blue-600 select-none"
+          onClick={() => setShowMonthSelection((val) => !val)}
+        >
           {day.format('MMMM')} {day.format('YYYY')}
         </div>
         <button className="w-8 h-8 flex-none group" onClick={increase}>
@@ -152,7 +145,7 @@ export function Calendar(props: CalendarProps) {
       </div>
       <hr></hr>
 
-      <div className="grid grid-cols-7" ref={datePickerPanel}>
+      <div className="grid grid-cols-7">
         {weekDays.map((val, index) => {
           return (
             <div key={`date_picker_${val}_${index}`} className="flex h-8 rounded-full">
@@ -187,7 +180,7 @@ export function Calendar(props: CalendarProps) {
         })}
       </div>
 
-      {showMonthSelection && <MonthSelection day={day} height={datePickerPanelHeight} />}
+      <MonthSelection day={day} visible={showMonthSelection} />
     </div>
   );
 }
