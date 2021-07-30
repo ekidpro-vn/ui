@@ -47,8 +47,9 @@ export function DatePicker({ InputComponent: InputElement }: DatePickerProps) {
   }, []);
 
   return (
-    <div>
+    <>
       <div
+        className="inline-block"
         ref={inputRef}
         onFocus={() => {
           setCalendarVisible(true);
@@ -63,6 +64,6 @@ export function DatePicker({ InputComponent: InputElement }: DatePickerProps) {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
