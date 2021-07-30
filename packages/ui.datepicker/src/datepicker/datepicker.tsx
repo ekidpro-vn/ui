@@ -2,9 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import { Popover } from './popover';
 
-export function DatePicker() {
+type DatePickerProps = {
+  InputComponent?: JSX.Element;
+};
+
+export function DatePicker({ InputComponent: InputElement }: DatePickerProps) {
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
   const { styles, attributes } = usePopper(inputRef.current, popoverRef.current, {
     placement: 'bottom',
@@ -44,15 +48,20 @@ export function DatePicker() {
 
   return (
     <div>
-      <input
-        className="bg-red-800"
+      <div
         ref={inputRef}
         onFocus={() => {
           setCalendarVisible(true);
         }}
-      />
+      >
+        {InputElement ?? <input className="bg-red-800" />}
+      </div>
       <div style={styles.popper} {...attributes.popper} ref={popoverRef}>
-        {calendarVisible && <Popover />}
+        {calendarVisible && (
+          <div className="flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow">
+            <Popover />
+          </div>
+        )}
       </div>
     </div>
   );

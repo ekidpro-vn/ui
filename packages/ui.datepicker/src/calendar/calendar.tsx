@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { DateContextProps, DatePickerContext, UpdatePickerContext } from '../context/date-context';
 import dayjs from '../context/parser';
 import { css } from '../utils/css';
@@ -10,8 +10,13 @@ function arrayWith(numberOfItems: number) {
 }
 
 export function Calendar(props: CalendarProps) {
-  const { day, mode } = props;
+  const { day, mode, transparent = false } = props;
+
   const [showMonthSelection, setShowMonthSelection] = useState(false);
+
+  const datePickerPanel = useRef<HTMLDivElement>(null);
+  const [datePickerPanelHeight, updateDatePickerPanelHeight] = useState<number>(0);
+
   const state = useContext(DatePickerContext);
   const action = useContext(UpdatePickerContext);
   const { weekDays, daysOfMonth } = useMemo(() => {
@@ -80,13 +85,25 @@ export function Calendar(props: CalendarProps) {
     }
   }, [action]);
 
+  useEffect(() => {
+    if (datePickerPanel.current) {
+      const height = datePickerPanel.current.getBoundingClientRect().height;
+      updateDatePickerPanelHeight(height);
+    }
+  }, [datePickerPanel]);
+
   return (
-    <div className="flex flex-col">
+    <div
+      className={css({
+        'flex flex-col relative': true,
+        'bg-white': !transparent,
+      })}
+      style={{ minWidth: '14rem' }}
+    >
       <div className="header flex">
         <button className="w-8 h-8 flex-none group" onClick={decrease}>
           <svg
             version="1.1"
-            id="Capa_1"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
             x="0px"
@@ -135,44 +152,42 @@ export function Calendar(props: CalendarProps) {
       </div>
       <hr></hr>
 
-      {showMonthSelection && <MonthSelection day={day} />}
+      <div className="grid grid-cols-7" ref={datePickerPanel}>
+        {weekDays.map((val, index) => {
+          return (
+            <div key={`date_picker_${val}_${index}`} className="flex h-8 rounded-full">
+              <span className="m-auto text-xs text-gray-400">{val}</span>
+            </div>
+          );
+        })}
+        {daysOfMonth.map((val, index) => {
+          const key = `${day.year()}-${day.month()}-${val ?? `blank_${index}`}`;
+          const selected = state.selected.includes(key);
 
-      {!showMonthSelection && (
-        <div className="grid grid-cols-7 bg-white w-56">
-          {weekDays.map((val, index) => {
-            return (
-              <div key={`date_picker_${val}_${index}`} className="flex bg-white w-8 h-8 rounded-full">
-                <span className="m-auto text-xs text-gray-400">{val}</span>
-              </div>
-            );
-          })}
-          {daysOfMonth.map((val, index) => {
-            const key = `${day.year()}-${day.month()}-${val ?? `blank_${index}`}`;
-            const selected = state.selected.includes(key);
+          let isBetween = false;
+          if (mode === 'range' && state.selected.length === 2 && val !== null) {
+            isBetween = dayjs(key).isBetween(state.selected[0], state.selected[1]);
+          }
 
-            let isBetween = false;
-            if (mode === 'range' && state.selected.length === 2 && val !== null) {
-              isBetween = dayjs(key).isBetween(state.selected[0], state.selected[1]);
-            }
+          return (
+            <div
+              key={`date_picker_${key}_${isBetween}`}
+              className={css({
+                'transition-all duration-100 flex h-8 cursor-pointer': true,
+                'rounded-md': selected,
+                'bg-blue-600 text-white': selected,
+                'text-gray-600 hover:text-gray-300': !selected && !isBetween,
+                'bg-clip-content pt-1 pb-1 text-white bg-blue-300': isBetween,
+              })}
+              onClick={() => onClick(val)}
+            >
+              <span className={css({ 'm-auto text-sm select-none': true, 'font-bold': selected })}>{val}</span>
+            </div>
+          );
+        })}
+      </div>
 
-            return (
-              <div
-                key={`date_picker_${key}_${isBetween}`}
-                className={css({
-                  'transition-all duration-100 flex w-8 h-8 cursor-pointer': true,
-                  'rounded-md': selected,
-                  'bg-blue-600 text-white': selected,
-                  'bg-white text-gray-600 hover:text-gray-300': !selected && !isBetween,
-                  'bg-clip-content pt-1 pb-1 text-white bg-blue-300': isBetween,
-                })}
-                onClick={() => onClick(val)}
-              >
-                <span className={css({ 'm-auto text-sm select-none': true, 'font-bold': selected })}>{val}</span>
-              </div>
-            );
-          })}
-        </div>
-      )}
+      {showMonthSelection && <MonthSelection day={day} height={datePickerPanelHeight} />}
     </div>
   );
 }
@@ -183,7 +198,7 @@ export function CalendarControlled(props: CalendarProps) {
   return (
     <UpdatePickerContext.Provider value={setState}>
       <DatePickerContext.Provider value={state}>
-        <Calendar {...props} mode="range" />
+        <Calendar {...props} mode={props.mode} />
       </DatePickerContext.Provider>
     </UpdatePickerContext.Provider>
   );

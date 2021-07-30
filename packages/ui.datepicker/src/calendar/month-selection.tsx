@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
-import { useContext, useEffect, useMemo } from 'react';
+import { Fragment, useContext, useEffect, useMemo } from 'react';
 import { UpdatePickerContext } from '../context/date-context';
 import { css } from '../utils/css';
 
-export function MonthSelection(props: { day: dayjs.Dayjs }) {
-  const { day } = props;
+export function MonthSelection(props: { day: dayjs.Dayjs; height: number }) {
+  const { day, height } = props;
   const action = useContext(UpdatePickerContext);
 
   const years = useMemo(() => {
@@ -26,13 +26,16 @@ export function MonthSelection(props: { day: dayjs.Dayjs }) {
   }, [day]);
 
   return (
-    <div className="flex flex-col max-h-44 overflow-y-auto w-56">
+    <div
+      className="absolute bg-white top-8 left-0 right-0 flex flex-col overflow-y-scroll w-full pr-4"
+      style={{ height }}
+    >
       {years.map((y) => {
         return (
-          <>
+          <Fragment key={y}>
             <hr />
             <div className={`flex flex-row py-2 year_${y}`}>
-              <div className="px-1 align-middle m-auto text-xs">{y}</div>
+              <div className="px-1 align-middle m-auto text-sm">{y}</div>
               <div className="grid grid-cols-6 gap-1">
                 {Array.from(new Array(12).keys()).map((month) => {
                   const isCurrentMonth = day.year() === y && day.month() === month;
@@ -46,9 +49,10 @@ export function MonthSelection(props: { day: dayjs.Dayjs }) {
                       })}
                       onClick={() => {
                         if (action) {
-                          action((state) => ({ ...state, month, year: y }));
+                          action((state) => ({ ...state, month: month + 1, year: y }));
                         }
                       }}
+                      key={month}
                     >
                       {month + 1}
                     </button>
@@ -56,7 +60,7 @@ export function MonthSelection(props: { day: dayjs.Dayjs }) {
                 })}
               </div>
             </div>
-          </>
+          </Fragment>
         );
       })}
     </div>
