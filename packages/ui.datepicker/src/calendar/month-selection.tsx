@@ -3,8 +3,8 @@ import { Fragment, useContext, useEffect, useMemo } from 'react';
 import { UpdatePickerContext } from '../context/date-context';
 import { css } from '../utils/css';
 
-export function MonthSelection(props: { day: dayjs.Dayjs; height: number }) {
-  const { day, height } = props;
+export function MonthSelection(props: { day: dayjs.Dayjs; visible: boolean }) {
+  const { day, visible } = props;
   const action = useContext(UpdatePickerContext);
 
   const years = useMemo(() => {
@@ -27,8 +27,10 @@ export function MonthSelection(props: { day: dayjs.Dayjs; height: number }) {
 
   return (
     <div
-      className="absolute bg-white top-8 left-0 right-0 flex flex-col overflow-y-scroll w-full pr-4"
-      style={{ height }}
+      className={css({
+        'absolute bg-white top-8 left-0 right-0 bottom-0 flex flex-col overflow-y-scroll w-full pr-4': true,
+        hidden: !visible,
+      })}
     >
       {years.map((y) => {
         return (
