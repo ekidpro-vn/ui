@@ -1,5 +1,7 @@
+import React from 'react';
+
 export interface PortletHeaderProps {
-  title?: string | JSX.Element;
-  toolbar?: JSX.Element;
-  subTitle?: string | JSX.Element;
+  title?: string | React.ReactNode;
+  toolbar?: React.ReactNode;
+  subTitle?: string | React.ReactNode;
 }
