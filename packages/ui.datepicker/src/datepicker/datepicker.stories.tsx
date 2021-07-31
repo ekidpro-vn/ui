@@ -13,10 +13,10 @@ const Datepicker: Story<ComponentProps<typeof DatePicker>> = (args: any) => {
 };
 
 export const DefaultComponent = Datepicker.bind({});
-DefaultComponent.storyName = 'DatePicker with input selection';
+DefaultComponent.storyName = 'Default input';
 
 export const DatePickerWithCustomInput = Datepicker.bind({})
-DatePickerWithCustomInput.storyName = "DatePicker with custom Input"
+DatePickerWithCustomInput.storyName = "Custom Input"
 DatePickerWithCustomInput.args = {
   InputComponent: <input className="w-72 h-8 bg-yellow-200 rounded shadow border py-2 px-2" placeholder="Click to open date picker" />
 }
@@ -26,7 +26,7 @@ const CalendarPicker: Story<ComponentProps<typeof Popover>> = (args: any) => {
 };
 
 export const OnlyPopover = CalendarPicker.bind({});
-OnlyPopover.storyName = 'DatePicker without input. Only popover';
+OnlyPopover.storyName = 'Without input. Only popover';
 OnlyPopover.args = {
   onChange: (data) => {
     console.log(`Data change = `, data);
@@ -43,6 +43,15 @@ PopoverSingleCalendar.args = {
   mode: 'single'
 };
 
+export const PopoverWithDefaultSelections = CalendarPicker.bind({})
+PopoverWithDefaultSelections.storyName = "Default selection"
+PopoverWithDefaultSelections.args = {
+  defaultSelected: [new Date(), (function () {
+    const date = new Date()
+    date.setDate(date.getDate() - 3)
+    return date
+  })()]
+}
 
 const CalendarWrapper: Story<ComponentProps<typeof Popover>> = (args: any) => {
   return (
@@ -55,7 +64,7 @@ const CalendarWrapper: Story<ComponentProps<typeof Popover>> = (args: any) => {
 };
 
 export const CalendarWithWrapper = CalendarWrapper.bind({})
-CalendarWithWrapper.storyName = "Calendar with wrapper"
+CalendarWithWrapper.storyName = "Wrapper"
 CalendarWithWrapper.args = {
   numberOfItems: 1
 }
@@ -87,4 +96,4 @@ const CalendarWithScrollContent: Story<ComponentProps<typeof Popover>> = (args: 
 };
 
 export const CalendarInScroll = CalendarWithScrollContent.bind({})
-CalendarInScroll.storyName = "Calendar with scroll content"
+CalendarInScroll.storyName = "Scroll content"
