@@ -24,6 +24,14 @@ Secondary.args = {
   children: 'Secondary'
 }
 
+export const Disabled = ButtonComponent.bind({})
+Disabled.storyName = "Disabled"
+Disabled.args = {
+  variant: 'secondary',
+  children: 'Secondary',
+  disabled: true
+}
+
 export const FixedWidth = ButtonComponent.bind({})
 FixedWidth.storyName = "Fixed Width"
 FixedWidth.args = {
