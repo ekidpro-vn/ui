@@ -7,7 +7,7 @@ import { getColorFrom, getColorSchemeOf } from './color-scheme';
 
 export const Button = memo(
   forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonProps, ref) => {
-    const { variant = 'primary', colorScheme, ...rest } = props;
+    const { variant = 'primary', colorScheme, rounded = 'normal', ...rest } = props;
     const className = getColorFrom(colorScheme) || getColorSchemeOf(variant) || '';
 
     return (
@@ -15,11 +15,14 @@ export const Button = memo(
         {...rest}
         ref={ref}
         type="button"
-        className={clsx(
-          'py-2 px-4  w-full transition ease-in duration-200 shadow-md rounded-lg',
-          className,
-          props.className
-        )}
+        className={clsx('py-2 px-4 transition ease-in duration-200 rounded', className, props.className, {
+          rounded: rounded === 'normal',
+          'rounded-md': rounded === 'md',
+          'rounded-lg': rounded === 'lg',
+          'rounded-sm': rounded === 'sm',
+          'rounded-none': rounded === 'none',
+          'rounded-full': rounded === 'full',
+        })}
       >
         {props.children}
       </button>
