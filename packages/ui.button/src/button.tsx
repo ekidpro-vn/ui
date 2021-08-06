@@ -7,7 +7,12 @@ import { getColorFrom, getColorSchemeOf } from './color-scheme';
 
 export const Button = memo(
   forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonProps, ref) => {
-    const { variant = 'primary', colorScheme, rounded = 'normal', ...rest } = props;
+    const { colorScheme, rounded = 'normal', ...rest } = props;
+    let variant = props.variant ?? 'primary';
+    if (props.disabled) {
+      variant = 'disabled';
+    }
+
     const className = getColorFrom(colorScheme) || getColorSchemeOf(variant) || '';
 
     return (
@@ -22,6 +27,7 @@ export const Button = memo(
           'rounded-sm': rounded === 'sm',
           'rounded-none': rounded === 'none',
           'rounded-full': rounded === 'full',
+          'cursor-not-allowed': props.disabled,
         })}
       >
         {props.children}

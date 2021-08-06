@@ -29,6 +29,13 @@ const colorSchemes: { [key: string]: ButtonColorScheme } = {
     text: 'text-white text-center text-base font-medium',
     border: undefined,
   },
+  disabled: {
+    bgColor: 'bg-gray-400',
+    hover: undefined,
+    focus: undefined,
+    text: 'text-white text-center text-base font-medium',
+    border: undefined,
+  },
 };
 
 export function getColorFrom(scheme?: ButtonColorScheme): string | undefined {
