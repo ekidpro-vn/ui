@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react';
 
-export type ButtonType = 'primary' | 'secondary' | 'warning' | 'error';
+export type ButtonType = 'primary' | 'secondary' | 'warn' | 'error';
 
 export type ButtonColorScheme = {
   bgColor?: string;
@@ -12,5 +12,6 @@ export type ButtonColorScheme = {
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonType;
+  rounded?: 'sm' | 'md' | 'lg' | 'normal' | 'full' | 'none';
   colorScheme?: ButtonColorScheme;
 }

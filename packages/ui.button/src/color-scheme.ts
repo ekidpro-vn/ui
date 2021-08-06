@@ -8,6 +8,27 @@ const colorSchemes: { [key: string]: ButtonColorScheme } = {
     text: 'text-white text-center text-base font-semibold',
     border: undefined,
   },
+  secondary: {
+    bgColor: 'bg-white',
+    hover: 'hover:bg-gray-100',
+    focus: undefined,
+    text: 'text-gray-900 text-center text-base font-medium',
+    border: 'border',
+  },
+  warn: {
+    bgColor: 'bg-yellow-400',
+    hover: 'hover:bg-yellow-500',
+    focus: undefined,
+    text: 'text-white text-center text-base font-medium',
+    border: undefined,
+  },
+  error: {
+    bgColor: 'bg-red-500',
+    hover: 'hover:bg-red-600',
+    focus: undefined,
+    text: 'text-white text-center text-base font-medium',
+    border: undefined,
+  },
 };
 
 export function getColorFrom(scheme?: ButtonColorScheme): string | undefined {
