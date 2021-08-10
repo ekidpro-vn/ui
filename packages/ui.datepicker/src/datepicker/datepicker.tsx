@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
+import { css } from '../utils/css';
 import { Popover } from './popover';
 
 type DatePickerProps = {
@@ -60,11 +61,14 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode }: Dat
         {InputElement ?? <input className="bg-red-800" />}
       </div>
       <div style={styles.popper} {...attributes.popper} ref={popoverRef}>
-        {calendarVisible && (
-          <div className="flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow">
-            <Popover mode={mode} onChange={onChange} />
-          </div>
-        )}
+        <div
+          className={css({
+            'flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow': true,
+            hidden: !calendarVisible,
+          })}
+        >
+          <Popover mode={mode} onChange={onChange} />
+        </div>
       </div>
     </>
   );
