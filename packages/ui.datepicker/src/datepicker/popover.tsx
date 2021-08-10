@@ -38,28 +38,32 @@ export function Popover(props: PopoverProps) {
   }, [state, numberOfItems]);
 
   useEffect(() => {
-    if (onChange) {
-      // YYYY-MM-DD
-      // MM using dayjs index, so we need to add 1 to make it like a normal day
-
-      const dates = selected
-        .map((d) => {
-          return d
-            .split('-')
-            .map((d, index) => {
-              if (index === 1) {
-                return `${parseInt(d, 10) + 1}`;
-              } else {
-                return d;
-              }
-            })
-            .join('-');
-        })
-        .map((d) => dayjs(d).toDate());
-
-      onChange(dates);
+    if (typeof onChange === 'undefined' || onChange === null || JSON.stringify(defaultV) === JSON.stringify(selected)) {
+      return () => {
+        // nothing
+      };
     }
-  }, [selected, onChange]);
+
+    // YYYY-MM-DD
+    // MM using dayjs index, so we need to add 1 to make it like a normal day
+
+    const dates = selected
+      .map((d) => {
+        return d
+          .split('-')
+          .map((d, index) => {
+            if (index === 1) {
+              return `${parseInt(d, 10) + 1}`;
+            } else {
+              return d;
+            }
+          })
+          .join('-');
+      })
+      .map((d) => dayjs(d).toDate());
+
+    onChange(dates);
+  }, [selected, defaultV, onChange]);
 
   return (
     <UpdatePickerContext.Provider value={setState}>
