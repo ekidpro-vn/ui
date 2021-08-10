@@ -18,7 +18,8 @@ DefaultComponent.storyName = 'Default input';
 export const DatePickerWithCustomInput = Datepicker.bind({})
 DatePickerWithCustomInput.storyName = "Custom Input"
 DatePickerWithCustomInput.args = {
-  InputComponent: <input className="w-72 h-8 bg-yellow-200 rounded shadow border py-2 px-2" placeholder="Click to open date picker" />
+  InputComponent: <input className="w-72 h-8 bg-yellow-200 rounded shadow border py-2 px-2" placeholder="Click to open date picker" />,
+  onChange: v => console.log(22, v)
 }
 
 const CalendarPicker: Story<ComponentProps<typeof Popover>> = (args: any) => {

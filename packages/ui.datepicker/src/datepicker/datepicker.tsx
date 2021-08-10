@@ -4,9 +4,10 @@ import { Popover } from './popover';
 
 type DatePickerProps = {
   InputComponent?: JSX.Element;
+  onChange?: (selected: Date[]) => void;
 };
 
-export function DatePicker({ InputComponent: InputElement }: DatePickerProps) {
+export function DatePicker({ InputComponent: InputElement, onChange }: DatePickerProps) {
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
   const inputRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -60,7 +61,7 @@ export function DatePicker({ InputComponent: InputElement }: DatePickerProps) {
       <div style={styles.popper} {...attributes.popper} ref={popoverRef}>
         {calendarVisible && (
           <div className="flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow">
-            <Popover />
+            <Popover onChange={onChange} />
           </div>
         )}
       </div>
