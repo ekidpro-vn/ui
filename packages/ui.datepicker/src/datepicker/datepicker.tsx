@@ -61,13 +61,12 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
       >
         {InputElement ?? <input className="bg-red-800" />}
       </div>
-      <div style={styles.popper} {...attributes.popper} ref={popoverRef}>
+      <div style={{ ...styles.popper, zIndex, backgroundColor: 'white' }} {...attributes.popper} ref={popoverRef}>
         <div
           className={css({
             'flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow': true,
             hidden: !calendarVisible,
           })}
-          style={zIndex ? { zIndex } : undefined}
         >
           <Popover mode={mode} onChange={onChange} />
         </div>
