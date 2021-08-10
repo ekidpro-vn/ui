@@ -6,10 +6,11 @@ import { Popover } from './popover';
 type DatePickerProps = {
   InputComponent?: JSX.Element;
   mode?: 'single' | 'multi' | 'range';
+  zIndex?: number;
   onChange?: (selected: Date[]) => void;
 };
 
-export function DatePicker({ InputComponent: InputElement, onChange, mode }: DatePickerProps) {
+export function DatePicker({ InputComponent: InputElement, onChange, mode, zIndex }: DatePickerProps) {
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
   const inputRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -66,6 +67,7 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode }: Dat
             'flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow': true,
             hidden: !calendarVisible,
           })}
+          style={zIndex ? { zIndex } : undefined}
         >
           <Popover mode={mode} onChange={onChange} />
         </div>
