@@ -11,7 +11,6 @@ export const TextFieldContext = createContext<IContextProps>({} as IContextProps
 
 export const TextFieldProvider: React.FC = (props) => {
   const [state, dispatch] = useReducer(reducer, initState);
-
   const value = { state, dispatch };
 
   return <TextFieldContext.Provider value={value}>{props.children}</TextFieldContext.Provider>;

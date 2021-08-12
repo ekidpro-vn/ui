@@ -10,7 +10,7 @@ export type IconProps = {
 };
 
 export type TextFieldGroupProps = {
-  error?: boolean;
+  checkRequired?: boolean;
 };
 
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {

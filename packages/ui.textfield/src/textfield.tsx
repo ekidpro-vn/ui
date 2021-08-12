@@ -1,5 +1,4 @@
 import { memo, useContext, useState } from 'react';
-import { setErrorValidate } from './context/actions';
 import { TextFieldContext } from './context/context';
 import { TextInputStyle } from './textfield.styles';
 import { IconProps, TextDescriptionProps, TextInputProps, TextLabelProps } from './textfield.types';
@@ -28,18 +27,23 @@ const Icon: React.FC<IconProps> = memo((props) => {
 export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
   const { content, children, required } = props;
 
-  if (children) {
-    return <>{children}</>;
+  if (!content && !children) {
+    return null;
   }
 
-  if (!content) {
-    return null;
+  if (children) {
+    return (
+      <div>
+        <div>{children}</div>
+        {required && <span className="text-red-500 ml-2 font-semibold">*</span>}
+      </div>
+    );
   }
 
   return (
     <div className="mb-1">
-      <span className="font-medium">{content}</span>
-      {required && <span className="text-red-500 ml-1.5">*</span>}
+      <label className="font-semibold">{content}</label>
+      {required && <span className="text-red-500 ml-2 font-semibold">*</span>}
     </div>
   );
 });
@@ -47,7 +51,8 @@ export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
 export const TextInput: React.FC<TextInputProps> = memo((props) => {
   const { icons, className, onBlur, onChange, ...inputProps } = props;
   const [valueInput, setValueInput] = useState<string>('');
-  const { state, dispatch } = useContext(TextFieldContext);
+  const { state } = useContext(TextFieldContext);
+  const [requiredError, setRequiredError] = useState<boolean>(false);
 
   const leftIcon = icons?.find((item) => item.position === 'left');
   const rightIcon = icons?.find((item) => item.position === 'right');
@@ -65,13 +70,13 @@ export const TextInput: React.FC<TextInputProps> = memo((props) => {
           {...inputProps}
           onBlur={(e) => {
             onBlur && onBlur(e);
-            if (state.groupProps?.error && !valueInput && !state?.errorValidate) {
-              dispatch(setErrorValidate(true));
+            if (state.groupProps?.checkRequired && !valueInput) {
+              setRequiredError(true);
             }
           }}
           onChange={(e) => {
             onChange && onChange(e);
-            state?.errorValidate && dispatch(setErrorValidate(!e.target.value));
+            setRequiredError(!e.target.value);
             setValueInput(e.target.value);
           }}
           className={
@@ -85,16 +90,20 @@ export const TextInput: React.FC<TextInputProps> = memo((props) => {
         />
         {rightIcon && <Icon icon={rightIcon} />}
       </div>
+      {requiredError && <span className="block mt-0.5 text-red-500">Required</span>}
     </TextInputStyle>
   );
 });
 
 export const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
   const { children, content } = props;
-  const { state } = useContext(TextFieldContext);
+
+  if (!content && !children) {
+    return null;
+  }
 
   if (children) {
-    return <div className={state.errorValidate && state.groupProps?.error ? 'text-red-500' : ''}>{children}</div>;
+    return <>{children}</>;
   }
-  return <div>{content}</div>;
+  return <span className="block text-sm mt-0.5">{content}</span>;
 });
