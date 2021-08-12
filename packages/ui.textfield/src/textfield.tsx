@@ -31,7 +31,7 @@ const Icon: React.FC<IconProps> = memo((props) => {
   );
 });
 
-const TextLabel: React.FC<TextLabelProps> = memo((props) => {
+export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
   const { content, children, required } = props;
 
   if (children) {
@@ -95,7 +95,7 @@ export const TextInput: React.FC<TextInputProps> = memo((props) => {
   );
 });
 
-const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
+export const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
   const { children, content, error } = props;
   const { state } = useContext(TextFieldContext);
 
@@ -105,7 +105,7 @@ const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
   return <div>{content}</div>;
 });
 
-const TextFieldGroupLayout: React.FC<TextFieldGroupProps> = memo((props) => {
+export const TextFieldGroup: React.FC<TextFieldGroupProps> = memo((props) => {
   const { children, ...childProps } = props;
 
   const childrenWithProps = Children.map(children, (child) => {
@@ -116,10 +116,4 @@ const TextFieldGroupLayout: React.FC<TextFieldGroupProps> = memo((props) => {
   });
 
   return <TextFieldProvider>{childrenWithProps}</TextFieldProvider>;
-});
-
-export const TextFieldGroup = Object.assign(TextFieldGroupLayout, {
-  Label: TextLabel,
-  Input: TextInput,
-  Description: TextDescription,
 });

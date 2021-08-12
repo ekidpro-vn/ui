@@ -1,1 +1,1 @@
-export { TextFieldGroup, TextInput } from './textfield';
+export { TextDescription, TextFieldGroup, TextInput, TextLabel } from './textfield';
