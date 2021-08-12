@@ -21,7 +21,7 @@ const TextFieldGroupComponent: Story<ComponentProps<typeof TextFieldGroup>> = (p
     <div className="w-1/4 mx-4">
       <TextFieldGroup error>
         <TextLabel required content="Username" />
-        <TextInput />
+        <TextInput name="ducnh" />
         <TextDescription>
           <span className="text-red-500">Username is required!</span>
         </TextDescription>

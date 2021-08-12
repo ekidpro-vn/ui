@@ -1,14 +1,8 @@
-import { Children, cloneElement, InputHTMLAttributes, isValidElement, memo, useContext, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import { setErrorValidate } from './context/actions';
-import { TextFieldContext, TextFieldProvider } from './context/context';
+import { TextFieldContext } from './context/context';
 import { TextInputStyle } from './textfield.styles';
-import {
-  IconProps,
-  TextDescriptionProps,
-  TextFieldGroupProps,
-  TextInputProps,
-  TextLabelProps,
-} from './textfield.types';
+import { IconProps, TextDescriptionProps, TextInputProps, TextLabelProps } from './textfield.types';
 import { css } from './utils/css';
 
 const Icon: React.FC<IconProps> = memo((props) => {
@@ -50,8 +44,8 @@ export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
   );
 });
 
-export const TextInput: React.FC<TextInputProps & InputHTMLAttributes<HTMLInputElement>> = memo((props) => {
-  const { icons, className, onBlur, onChange, error, ...inputProps } = props;
+export const TextInput: React.FC<TextInputProps> = memo((props) => {
+  const { icons, className, onBlur, onChange, ...inputProps } = props;
   const [valueInput, setValueInput] = useState<string>('');
   const { state, dispatch } = useContext(TextFieldContext);
 
@@ -71,7 +65,7 @@ export const TextInput: React.FC<TextInputProps & InputHTMLAttributes<HTMLInputE
           {...inputProps}
           onBlur={(e) => {
             onBlur && onBlur(e);
-            if (error && !valueInput && !state?.errorValidate) {
+            if (state.groupProps?.error && !valueInput && !state?.errorValidate) {
               dispatch(setErrorValidate(true));
             }
           }}
@@ -96,24 +90,11 @@ export const TextInput: React.FC<TextInputProps & InputHTMLAttributes<HTMLInputE
 });
 
 export const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
-  const { children, content, error } = props;
+  const { children, content } = props;
   const { state } = useContext(TextFieldContext);
 
   if (children) {
-    return <div className={state.errorValidate && error ? 'text-red-500' : ''}>{children}</div>;
+    return <div className={state.errorValidate && state.groupProps?.error ? 'text-red-500' : ''}>{children}</div>;
   }
   return <div>{content}</div>;
-});
-
-export const TextFieldGroup: React.FC<TextFieldGroupProps> = memo((props) => {
-  const { children, ...childProps } = props;
-
-  const childrenWithProps = Children.map(children, (child) => {
-    if (isValidElement(child)) {
-      return cloneElement(child, { ...childProps });
-    }
-    return child;
-  });
-
-  return <TextFieldProvider>{childrenWithProps}</TextFieldProvider>;
 });

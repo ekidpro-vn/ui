@@ -1,10 +1,6 @@
 import { createContext, Dispatch, useReducer } from 'react';
 import { Action } from './actions';
-import { initState, reducer } from './reducer';
-
-type IState = {
-  errorValidate?: boolean;
-};
+import { initState, IState, reducer } from './reducer';
 
 interface IContextProps {
   state: IState;
