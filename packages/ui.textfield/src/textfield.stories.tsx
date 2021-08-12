@@ -19,11 +19,11 @@ const TextInputComponent: Story<ComponentProps<typeof TextFieldGroup>> = (props)
 const TextFieldGroupComponent: Story<ComponentProps<typeof TextFieldGroup>> = (props) => (
   <div className="flex items-center justify-center">
     <div className="w-1/4 mx-4">
-      <TextFieldGroup error>
-        <TextLabel required content="Username" />
+      <TextFieldGroup checkRequired>
+        <TextLabel required content="Email" />
         <TextInput />
         <TextDescription>
-          <span className="text-red-500">Username is required!</span>
+          <span>Ex: example@gmail.com</span>
         </TextDescription>
       </TextFieldGroup>
     </div>

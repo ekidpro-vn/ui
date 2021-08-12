@@ -1,14 +1,7 @@
-import { Children, cloneElement, InputHTMLAttributes, isValidElement, memo, useContext, useState } from 'react';
-import { setErrorValidate } from './context/actions';
-import { TextFieldContext, TextFieldProvider } from './context/context';
+import { memo, useContext, useState } from 'react';
+import { TextFieldContext } from './context/context';
 import { TextInputStyle } from './textfield.styles';
-import {
-  IconProps,
-  TextDescriptionProps,
-  TextFieldGroupProps,
-  TextInputProps,
-  TextLabelProps,
-} from './textfield.types';
+import { IconProps, TextDescriptionProps, TextInputProps, TextLabelProps } from './textfield.types';
 import { css } from './utils/css';
 
 const Icon: React.FC<IconProps> = memo((props) => {
@@ -34,26 +27,32 @@ const Icon: React.FC<IconProps> = memo((props) => {
 export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
   const { content, children, required } = props;
 
-  if (children) {
-    return <>{children}</>;
+  if (!content && !children) {
+    return null;
   }
 
-  if (!content) {
-    return null;
+  if (children) {
+    return (
+      <div>
+        <div>{children}</div>
+        {required && <span className="text-red-500 ml-2 font-semibold">*</span>}
+      </div>
+    );
   }
 
   return (
     <div className="mb-1">
-      <span className="font-medium">{content}</span>
-      {required && <span className="text-red-500 ml-1.5">*</span>}
+      <label className="font-semibold">{content}</label>
+      {required && <span className="text-red-500 ml-2 font-semibold">*</span>}
     </div>
   );
 });
 
-export const TextInput: React.FC<TextInputProps & InputHTMLAttributes<HTMLInputElement>> = memo((props) => {
-  const { icons, className, onBlur, onChange, error, ...inputProps } = props;
+export const TextInput: React.FC<TextInputProps> = memo((props) => {
+  const { icons, className, onBlur, onChange, ...inputProps } = props;
   const [valueInput, setValueInput] = useState<string>('');
-  const { state, dispatch } = useContext(TextFieldContext);
+  const { state } = useContext(TextFieldContext);
+  const [requiredError, setRequiredError] = useState<boolean>(false);
 
   const leftIcon = icons?.find((item) => item.position === 'left');
   const rightIcon = icons?.find((item) => item.position === 'right');
@@ -71,13 +70,13 @@ export const TextInput: React.FC<TextInputProps & InputHTMLAttributes<HTMLInputE
           {...inputProps}
           onBlur={(e) => {
             onBlur && onBlur(e);
-            if (error && !valueInput && !state?.errorValidate) {
-              dispatch(setErrorValidate(true));
+            if (state.groupProps?.checkRequired && !valueInput) {
+              setRequiredError(true);
             }
           }}
           onChange={(e) => {
             onChange && onChange(e);
-            state?.errorValidate && dispatch(setErrorValidate(!e.target.value));
+            setRequiredError(!e.target.value);
             setValueInput(e.target.value);
           }}
           className={
@@ -91,29 +90,20 @@ export const TextInput: React.FC<TextInputProps & InputHTMLAttributes<HTMLInputE
         />
         {rightIcon && <Icon icon={rightIcon} />}
       </div>
+      {requiredError && <span className="block mt-0.5 text-red-500">Required</span>}
     </TextInputStyle>
   );
 });
 
 export const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
-  const { children, content, error } = props;
-  const { state } = useContext(TextFieldContext);
+  const { children, content } = props;
+
+  if (!content && !children) {
+    return null;
+  }
 
   if (children) {
-    return <div className={state.errorValidate && error ? 'text-red-500' : ''}>{children}</div>;
+    return <>{children}</>;
   }
-  return <div>{content}</div>;
-});
-
-export const TextFieldGroup: React.FC<TextFieldGroupProps> = memo((props) => {
-  const { children, ...childProps } = props;
-
-  const childrenWithProps = Children.map(children, (child) => {
-    if (isValidElement(child)) {
-      return cloneElement(child, { ...childProps });
-    }
-    return child;
-  });
-
-  return <TextFieldProvider>{childrenWithProps}</TextFieldProvider>;
+  return <span className="block text-sm mt-0.5">{content}</span>;
 });
