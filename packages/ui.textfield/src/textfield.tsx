@@ -1,4 +1,4 @@
-import { Children, cloneElement, isValidElement, memo, useContext, useState } from 'react';
+import { Children, cloneElement, InputHTMLAttributes, isValidElement, memo, useContext, useState } from 'react';
 import { setErrorValidate } from './context/actions';
 import { TextFieldContext, TextFieldProvider } from './context/context';
 import { TextInputStyle } from './textfield.styles';
@@ -50,7 +50,7 @@ export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
   );
 });
 
-export const TextInput: React.FC<TextInputProps> = memo((props) => {
+export const TextInput: React.FC<TextInputProps & InputHTMLAttributes<HTMLInputElement>> = memo((props) => {
   const { icons, className, onBlur, onChange, error, ...inputProps } = props;
   const [valueInput, setValueInput] = useState<string>('');
   const { state, dispatch } = useContext(TextFieldContext);
