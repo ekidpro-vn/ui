@@ -1,7 +1,7 @@
 
 import { Meta, Story } from '@storybook/react';
 import { ComponentProps } from "react";
-import { TextFieldGroup, TextInput } from './index';
+import { TextDescription, TextFieldGroup, TextInput, TextLabel } from './index';
 
 export default {
   title: "TextField",
@@ -20,11 +20,11 @@ const TextFieldGroupComponent: Story<ComponentProps<typeof TextFieldGroup>> = (p
   <div className="flex items-center justify-center">
     <div className="w-1/4 mx-4">
       <TextFieldGroup error>
-        <TextFieldGroup.Label required content="Username" />
-        <TextFieldGroup.Input />
-        <TextFieldGroup.Description>
+        <TextLabel required content="Username" />
+        <TextInput />
+        <TextDescription>
           <span className="text-red-500">Username is required!</span>
-        </TextFieldGroup.Description>
+        </TextDescription>
       </TextFieldGroup>
     </div>
   </div>
