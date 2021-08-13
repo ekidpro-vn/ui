@@ -25,10 +25,15 @@
     "storybook": "start-storybook -p 6006"
   },
   "devDependencies": {
-    "@popperjs/core": "^2.9.2",
+    "@tippyjs/react": "^4.2.5",
+    "@types/lodash.get": "^4.4.6",
+    "@types/react-window": "^1.8.5",
     "dayjs": "^1.10.5"
   },
   "peerDependencies": {
-    "@popperjs/core": "^2.9.2"
+    "@tippyjs/react": "^4.2.5"
+  },
+  "dependencies": {
+    "lodash.get": "^4.4.2"
   }
 }
