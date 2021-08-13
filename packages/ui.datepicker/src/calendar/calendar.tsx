@@ -143,6 +143,7 @@ export function Calendar(props: CalendarProps) {
           </svg>
         </button>
       </div>
+
       <hr></hr>
 
       <div className="grid grid-cols-7">
@@ -180,7 +181,7 @@ export function Calendar(props: CalendarProps) {
         })}
       </div>
 
-      <MonthSelection day={day} visible={showMonthSelection} />
+      {showMonthSelection && <MonthSelection day={day} />}
     </div>
   );
 }
