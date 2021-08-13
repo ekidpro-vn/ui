@@ -8,7 +8,6 @@ export interface IState {
 }
 
 export const initState = {
-  errorValidate: false,
   groupProps: undefined,
 };
 
