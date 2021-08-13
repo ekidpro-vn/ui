@@ -25,7 +25,7 @@ const Icon: React.FC<IconProps> = memo((props) => {
 });
 
 export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
-  const { content, children, required } = props;
+  const { content, children, required, ...labelProps } = props;
 
   if (!content && !children) {
     return null;
@@ -33,15 +33,15 @@ export const TextLabel: React.FC<TextLabelProps> = memo((props) => {
 
   if (children) {
     return (
-      <div>
-        <div>{children}</div>
+      <>
+        <>{children}</>
         {required && <span className="text-red-500 ml-2 font-semibold">*</span>}
-      </div>
+      </>
     );
   }
 
   return (
-    <div className="mb-1">
+    <div className="mb-1" {...labelProps}>
       <label className="font-semibold">{content}</label>
       {required && <span className="text-red-500 ml-2 font-semibold">*</span>}
     </div>
@@ -76,8 +76,10 @@ export const TextInput: React.FC<TextInputProps> = memo((props) => {
           }}
           onChange={(e) => {
             onChange && onChange(e);
-            setRequiredError(!e.target.value);
-            setValueInput(e.target.value);
+            if (state.groupProps?.checkRequired) {
+              setRequiredError(!e.target.value);
+              setValueInput(e.target.value);
+            }
           }}
           className={
             css({
@@ -96,7 +98,7 @@ export const TextInput: React.FC<TextInputProps> = memo((props) => {
 });
 
 export const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
-  const { children, content } = props;
+  const { children, content, ...descriptionProps } = props;
 
   if (!content && !children) {
     return null;
@@ -105,5 +107,9 @@ export const TextDescription: React.FC<TextDescriptionProps> = memo((props) => {
   if (children) {
     return <>{children}</>;
   }
-  return <span className="block text-sm mt-0.5">{content}</span>;
+  return (
+    <div {...descriptionProps}>
+      <span className="block text-sm mt-0.5">{content}</span>
+    </div>
+  );
 });
