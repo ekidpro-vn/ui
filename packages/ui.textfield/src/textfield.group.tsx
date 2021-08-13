@@ -4,15 +4,16 @@ import { TextFieldContext, TextFieldProvider } from './context/context';
 import { TextFieldGroupProps } from './textfield.types';
 
 const TextFieldGroupLayout: React.FC<TextFieldGroupProps> = memo((props) => {
+  const { children, ...groupProps } = props;
   const { dispatch } = useContext(TextFieldContext);
 
   useEffect(() => {
-    if (props) {
-      dispatch(setGroupProps(props));
+    if (groupProps) {
+      dispatch(setGroupProps(groupProps));
     }
-  }, [props, dispatch]);
+  }, [groupProps, dispatch]);
 
-  return <div>{props.children}</div>;
+  return <div {...groupProps}>{children}</div>;
 });
 
 export const TextFieldGroup: React.FC<TextFieldGroupProps> = memo((props) => {

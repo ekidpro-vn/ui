@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import { HTMLAttributes, InputHTMLAttributes } from 'react';
 
 export type Icon = {
   position: 'left' | 'right';
@@ -9,9 +9,9 @@ export type IconProps = {
   icon?: Icon;
 };
 
-export type TextFieldGroupProps = {
+export interface TextFieldGroupProps extends HTMLAttributes<HTMLDivElement> {
   checkRequired?: boolean;
-};
+}
 
 export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
@@ -20,11 +20,11 @@ export interface TextInputProps extends InputHTMLAttributes<HTMLInputElement> {
   onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
 }
 
-export interface TextDescriptionProps {
+export interface TextDescriptionProps extends HTMLAttributes<HTMLDivElement> {
   content?: string;
 }
 
-export interface TextLabelProps {
+export interface TextLabelProps extends HTMLAttributes<HTMLDivElement> {
   content?: string;
   required?: boolean;
 }
