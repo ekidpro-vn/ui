@@ -45,7 +45,7 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
     (attrs: { 'data-placement': Placement; 'data-reference-hidden'?: string; 'data-escaped'?: string }) => {
       return (
         <div
-          className="w-full h-auto border border-red flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow"
+          className="w-full h-auto border border-red bg-white flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow"
           tabIndex={-1}
           style={{ zIndex }}
           ref={popoverRef}
