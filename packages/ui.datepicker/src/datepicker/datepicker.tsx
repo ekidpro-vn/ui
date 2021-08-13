@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import { usePopper } from 'react-popper';
-import { css } from '../utils/css';
+import Tippy from '@tippyjs/react/headless';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { Placement } from 'tippy.js';
 import { Popover } from './popover';
 
 type DatePickerProps = {
@@ -14,30 +14,15 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
   const inputRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
-  const { styles, attributes } = usePopper(inputRef.current, popoverRef.current, {
-    placement: 'bottom',
-    modifiers: [
-      {
-        name: 'offset',
-        enabled: true,
-        options: {
-          offset: [4, 0],
-        },
-      },
-      {
-        name: 'flip',
-        enabled: true,
-        options: {
-          fallbackPlacements: ['top', 'bottom'],
-        },
-      },
-    ],
-  });
 
+  // handle click to close
   useEffect(() => {
-    // handle click to close
     function handleClickToClose(event: MouseEvent) {
       if (popoverRef.current?.contains(event.target as Node)) {
+        return;
+      }
+
+      if (inputRef.current?.contains(event.target as Node)) {
         return;
       }
 
@@ -50,27 +35,59 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
     };
   }, []);
 
-  return (
-    <>
-      <div
-        className="inline-block"
-        ref={inputRef}
-        onFocus={() => {
-          setCalendarVisible(true);
-        }}
-      >
-        {InputElement ?? <input className="bg-red-800" />}
-      </div>
-      <div style={{ ...styles.popper, zIndex, backgroundColor: 'white' }} {...attributes.popper} ref={popoverRef}>
+  // fuck react
+  const showPopover = useCallback(() => {
+    setCalendarVisible(true);
+  }, []);
+
+  // create popover
+  const renderPopover = useCallback(
+    (attrs: { 'data-placement': Placement; 'data-reference-hidden'?: string; 'data-escaped'?: string }) => {
+      return (
         <div
-          className={css({
-            'flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow': true,
-            hidden: !calendarVisible,
-          })}
+          className="w-full h-auto border border-red flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow"
+          tabIndex={-1}
+          style={{ zIndex }}
+          ref={popoverRef}
+          key={`${mode}_${JSON.stringify(attrs)}`}
+          {...attrs}
         >
           <Popover mode={mode} onChange={onChange} />
         </div>
-      </div>
-    </>
+      );
+    },
+    [mode, onChange, zIndex]
   );
+
+  return (
+    <Tippy interactive visible={calendarVisible} render={renderPopover}>
+      <div className="inline-block" ref={inputRef} onFocus={showPopover}>
+        {InputElement ?? <input className="bg-red-800" />}
+      </div>
+    </Tippy>
+  );
+
+  // return (
+  //   <>
+  //     <div
+  //       className="inline-block"
+  //       ref={inputRef}
+  //       onFocus={() => {
+  //         setCalendarVisible(true);
+  //       }}
+  //     >
+  //       {InputElement ?? <input className="bg-red-800" />}
+  //     </div>
+  //     <div style={{ ...styles.popper, zIndex, backgroundColor: 'white' }} {...attributes.popper} ref={popoverRef}>
+  //       <div
+  //         className={css({
+  //           'flex flex-row space-x-4 p-4 rounded border border-gray-200 shadow': true,
+  //           hidden: !calendarVisible,
+  //         })}
+  //       >
+  //         <Popover mode={mode} onChange={onChange} />
+  //       </div>
+  //     </div>
+  //   </>
+  // );
 }
