@@ -19,15 +19,11 @@ const Component = styled.div`
   .msg {
     font-size: 3vw;
   }
-
-  .feedback {
-    font-size: 2vw;
-  }
 `
 
 export function ErrorComponent(props: ErrorProps) {
   const { message = "We found some problems that need to be fixed now. Please try again later", className, support, supportLink } = props
-  console.log(955, support)
+
   return (
     <Component className={className ?? "p-4"}>
       <div className="flex flex-col space-y-4">
@@ -38,7 +34,7 @@ export function ErrorComponent(props: ErrorProps) {
           <div className="border-2 border-white">
             <QRCode value={support} fgColor="#3973aa" size={192} />
           </div>
-          <div className="text-xl flex-1 feedback">
+          <div className="text-xl flex-1 text-4xl">
             For more information about this issue and possible fixes, send us feedback via:
             <a className="ml-1 hover:text-blue-100 text-blue-200" href={supportLink ?? support}>{support}</a>
           </div>
