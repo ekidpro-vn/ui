@@ -28,9 +28,9 @@ export function ErrorComponent(props: ErrorProps) {
     <Component className={className ?? "p-4"}>
       <div className="flex flex-col space-y-4">
         <h1 className="icon">:(</h1>
-        <h2 className="text-lg msg">{message}</h2>
+        <h2 className="text-lg msg pt-16">{message}</h2>
 
-        <div className="flex flex-col md:flex-row space-y-0 md:space-y-0 md:space-x-4 pt-16">
+        <div className="flex flex-col md:flex-row space-y-0 md:space-y-0 md:space-x-4 pt-32">
           <div className="border-2 border-white">
             <QRCode value={support} fgColor="#3973aa" size={192} />
           </div>
