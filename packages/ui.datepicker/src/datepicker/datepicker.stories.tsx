@@ -27,6 +27,26 @@ const CalendarPicker: Story<ComponentProps<typeof Popover>> = (args: any) => {
   return <Popover {...args} />;
 };
 
+export const DatePickerWithHelper: Story<ComponentProps<typeof DatePicker>> = (args: any) => {
+  return <DatePicker {...args} />;
+};
+DatePickerWithHelper.storyName = "With helper"
+DatePickerWithHelper.args = {
+  helper: {
+    position: 'left'
+  }
+}
+
+export const DatePickerWithRightHelper: Story<ComponentProps<typeof DatePicker>> = (args: any) => {
+  return <DatePicker {...args} />;
+};
+DatePickerWithRightHelper.storyName = "With helper - position right"
+DatePickerWithRightHelper.args = {
+  helper: {
+    position: 'right'
+  }
+}
+
 export const OnlyPopover = CalendarPicker.bind({});
 OnlyPopover.storyName = 'Without input. Only popover';
 OnlyPopover.args = {

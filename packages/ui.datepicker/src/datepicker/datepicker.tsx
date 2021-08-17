@@ -1,16 +1,10 @@
 import Tippy from '@tippyjs/react/headless';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Placement } from 'tippy.js';
+import { DatePickerProps } from './datepicker.types';
 import { Popover } from './popover';
 
-type DatePickerProps = {
-  InputComponent?: JSX.Element;
-  mode?: 'single' | 'multi' | 'range';
-  zIndex?: number;
-  onChange?: (selected: Date[]) => void;
-};
-
-export function DatePicker({ InputComponent: InputElement, onChange, mode, zIndex }: DatePickerProps) {
+export function DatePicker({ InputComponent: InputElement, onChange, mode, zIndex, helper }: DatePickerProps) {
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
   const inputRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -52,7 +46,7 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
           key={`${mode}_${JSON.stringify(attrs)}`}
           {...attrs}
         >
-          <Popover mode={mode} onChange={onChange} />
+          <Popover mode={mode} onChange={onChange} helper={helper} />
         </div>
       );
     },
