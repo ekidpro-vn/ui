@@ -93,6 +93,7 @@ export function MonthSelection(props: { day: dayjs.Dayjs }) {
 
                   return (
                     <button
+                      type="button"
                       className={css({
                         'w-6 h-6 text-sm rounded': true,
                         'hover:bg-blue-300 text-gray-400 hover:text-white': !isCurrentMonth,

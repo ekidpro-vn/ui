@@ -50,15 +50,17 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
         </div>
       );
     },
-    [mode, onChange, zIndex]
+    [mode, onChange, zIndex, helper]
   );
 
   return (
-    <Tippy interactive visible={calendarVisible} render={renderPopover}>
-      <div className="inline-block" ref={inputRef} onFocus={showPopover}>
-        {InputElement ?? <input className="bg-red-800" />}
-      </div>
-    </Tippy>
+    <div className="block">
+      <Tippy interactive visible={calendarVisible} render={renderPopover}>
+        <div className="inline-block" ref={inputRef} onFocus={showPopover}>
+          {InputElement ?? <input className="bg-red-800" />}
+        </div>
+      </Tippy>
+    </div>
   );
 
   // return (
