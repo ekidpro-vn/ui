@@ -56,7 +56,7 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
   return (
     <div className="block">
       <Tippy interactive visible={calendarVisible} render={renderPopover}>
-        <div className="inline-block" ref={inputRef} onFocus={showPopover}>
+        <div className="inline-block w-full" ref={inputRef} onFocus={showPopover}>
           {InputElement ?? <input className="bg-red-800" />}
         </div>
       </Tippy>
