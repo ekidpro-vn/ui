@@ -15,6 +15,7 @@ export function Calendar(props: CalendarProps) {
   const [showMonthSelection, setShowMonthSelection] = useState(false);
 
   const state = useContext(DatePickerContext);
+
   const action = useContext(UpdatePickerContext);
   const { weekDays, daysOfMonth } = useMemo(() => {
     const blankValue = arrayWith(day.day()).map(() => null);

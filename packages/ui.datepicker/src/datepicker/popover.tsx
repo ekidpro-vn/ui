@@ -2,18 +2,12 @@ import dayjs from 'dayjs';
 import { useEffect, useMemo, useState } from 'react';
 import { Calendar } from '../calendar/calendar';
 import { DateContextProps, DatePickerContext, UpdatePickerContext } from '../context/date-context';
+import { PopoverProps } from './datepicker.types';
+import { DefaultHelper } from './default-helper';
 
-type PopoverProps = {
-  numberOfItems?: number;
-  month?: number;
-  year?: number;
-  mode?: 'single' | 'multi' | 'range';
-  onChange?: (selected: Date[]) => void;
-  defaultSelected?: Date[];
-};
 
 export function Popover(props: PopoverProps) {
-  const { numberOfItems = 2, month, year, onChange, defaultSelected, mode = 'range' } = props;
+  const { numberOfItems = 2, month, year, onChange, defaultSelected, mode = 'range', helper } = props;
 
   const defaultV = useMemo(() => {
     if (!defaultSelected) {
@@ -68,9 +62,11 @@ export function Popover(props: PopoverProps) {
   return (
     <UpdatePickerContext.Provider value={setState}>
       <DatePickerContext.Provider value={state}>
+        {helper && helper.position === 'left' && (helper.element ?? <DefaultHelper />)}
         {items.map((val) => (
           <Calendar key={val.toString()} day={val} mode={mode} />
         ))}
+        {helper && helper.position === 'right' && (helper.element ?? <DefaultHelper />)}
       </DatePickerContext.Provider>
     </UpdatePickerContext.Provider>
   );
