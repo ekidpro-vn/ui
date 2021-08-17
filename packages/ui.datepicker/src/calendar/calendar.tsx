@@ -92,7 +92,7 @@ export function Calendar(props: CalendarProps) {
       style={{ minWidth: '14rem' }}
     >
       <div className="header flex">
-        <button className="w-8 h-8 flex-none group" onClick={decrease}>
+        <button type="button" className="w-8 h-8 flex-none group" onClick={decrease}>
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +120,7 @@ export function Calendar(props: CalendarProps) {
         >
           {day.format('MMMM')} {day.format('YYYY')}
         </div>
-        <button className="w-8 h-8 flex-none group" onClick={increase}>
+        <button type="button" className="w-8 h-8 flex-none group" onClick={increase}>
           <svg
             version="1.1"
             id="Capa_1"

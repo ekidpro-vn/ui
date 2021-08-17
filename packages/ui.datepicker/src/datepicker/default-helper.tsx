@@ -85,6 +85,7 @@ export function DefaultHelper() {
             const end = `${endDay.year()}-${endDay.month()}-${endDay.date()}`;
             return { ...state, selected: [start, end] };
           });
+          break;
         }
 
         default:
@@ -97,6 +98,7 @@ export function DefaultHelper() {
   return (
     <div className="flex flex-col space-y-1">
       <button
+        type="button"
         data-name="today"
         className={css({
           [className]: true,
@@ -108,6 +110,7 @@ export function DefaultHelper() {
         Today
       </button>
       <button
+        type="button"
         data-name="week"
         className={css({
           [className]: true,
@@ -119,6 +122,7 @@ export function DefaultHelper() {
         This week
       </button>
       <button
+        type="button"
         data-name="month"
         className={css({
           [className]: true,
@@ -130,6 +134,7 @@ export function DefaultHelper() {
         This month
       </button>
       <button
+        type="button"
         data-name="quarter"
         className={css({
           [className]: true,
@@ -141,6 +146,7 @@ export function DefaultHelper() {
         This quarter
       </button>
       <button
+        type="button"
         data-name="year"
         className={css({
           [className]: true,
