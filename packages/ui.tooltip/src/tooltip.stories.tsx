@@ -1,6 +1,6 @@
-import { Tooltip } from "./index";
-import { Story, Meta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
 import { ComponentProps } from "react";
+import { Tooltip } from "./index";
 
 export default {
   title: "Tooltip",
@@ -18,18 +18,18 @@ TooltipDefault.storyName = 'Tooltip default';
 TooltipDefault.args = {
   tooltip: (
     <div className="p-4 w-80">
-      <p className="text-sm font-bold pb-1">Tooltip</p>
-      <p className="text-xs leading-4 pb-3">
+      <p className="text-sm font-bold text-gray-800 pb-1">Tooltip</p>
+      <p className="text-xs leading-4 text-gray-800 pb-3">
         Tooltip in left position. Tooltip in left position.
       </p>
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold cursor-pointer">Learn More</span>
-        <button className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
+        <span className="text-xs font-bold cursor-pointer text-gray-800">Learn More</span>
+        <span className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
           Got it
-        </button>
+        </span>
       </div>
     </div>),
-  children: <button className="bg-blue-500 text-white px-4 py-2 cursor-pointer">Hover me</button>
+  children: <button className="bg-blue-500 text-white px-4 py-2">Hover me</button>
 };
 
 export const TooltipLeft = TooltipComponent.bind({});
@@ -43,13 +43,13 @@ TooltipLeft.args = {
         Tooltip in left position. Tooltip in left position.
       </p>
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold text-indigo-50 cursor-pointer">Learn More</span>
-        <button className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
+        <span className="text-xs font-bold cursor-pointer text-gray-800">Learn More</span>
+        <span className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
           Got it
-        </button>
+        </span>
       </div>
     </div>),
-  children: <button className="bg-blue-500 text-white px-4 py-2 cursor-pointer">Hover me</button>
+  children: <span className="bg-blue-500 text-white px-4 py-2">Hover me</span>
 };
 
 export const TooltipRight = TooltipComponent.bind({});
@@ -60,16 +60,16 @@ TooltipRight.args = {
     <div className="p-5 w-80">
       <p className="text-sm font-bold text-gray-800 pb-1">Tooltip</p>
       <p className="text-xs leading-4 text-gray-600 pb-3">
-      Tooltip in right position. Tooltip in right position.
+        Tooltip in right position. Tooltip in right position.
       </p>
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold text-indigo-50 cursor-pointer">Learn More</span>
-        <button className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
+        <span className="text-xs font-bold cursor-pointer text-gray-800">Learn More</span>
+        <span className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
           Got it
-        </button>
+        </span>
       </div>
     </div>),
-  children: <button className="bg-blue-500 text-white px-4 py-2 cursor-pointer">Hover me</button>
+  children: <button className="bg-blue-500 text-white px-4 py-2">Hover me</button>
 };
 
 export const TooltipTop = TooltipComponent.bind({});
@@ -80,16 +80,16 @@ TooltipTop.args = {
     <div className="p-4 w-80">
       <p className="text-sm font-bold text-gray-800 pb-1">Tooltip</p>
       <p className="text-xs leading-4 text-gray-600 pb-3">
-      Tooltip at the top position. Tooltip at the top position.
+        Tooltip at the top position. Tooltip at the top position.
       </p>
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold text-indigo-50 cursor-pointer">Learn More</span>
-        <button className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
+        <span className="text-xs font-bold cursor-pointer text-gray-800">Learn More</span>
+        <span className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
           Got it
-        </button>
+        </span>
       </div>
     </div>),
-  children: <button className="bg-blue-500 text-white px-4 py-2 cursor-pointer">Hover me</button>
+  children: <button className="bg-blue-500 text-white px-4 py-2">Hover me</button>
 };
 
 export const TooltipBottom = TooltipComponent.bind({});
@@ -100,16 +100,16 @@ TooltipBottom.args = {
     <div className="p-4 w-80">
       <p className="text-sm font-bold text-gray-800 pb-1">Tooltip</p>
       <p className="text-xs leading-4 text-gray-600 pb-3">
-      Tooltip at the bottom position. Tooltip at the bottom position.
+        Tooltip at the bottom position. Tooltip at the bottom position.
       </p>
       <div className="flex items-center justify-between">
-        <span className="text-xs font-bold text-indigo-50 cursor-pointer">Learn More</span>
-        <button className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
+        <span className="text-xs font-bold cursor-pointer text-gray-800">Learn More</span>
+        <span className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 rounded text-white px-5 py-1 text-xs">
           Got it
-        </button>
+        </span>
       </div>
     </div>),
-  children:<button className="bg-blue-500 text-white px-4 py-2 cursor-pointer">Hover me</button>
+  children: <button className="bg-blue-500 text-white px-4 py-2">Hover me</button>
 };
 
 export const TooltipDarkMode = TooltipComponent.bind({});
@@ -120,14 +120,14 @@ TooltipDarkMode.args = {
     <div className="p-4 w-80">
       <p className="text-sm font-bold pb-1">Tooltip</p>
       <p className="text-xs leading-4 pb-3">
-      Tooltip at the bottom position. Tooltip at the bottom position.
+        Tooltip at the bottom position. Tooltip at the bottom position.
       </p>
       <div className="flex items-center justify-between">
         <span className="text-xs font-bold cursor-pointer">Learn More</span>
-        <button className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out rounded text-white px-5 py-1 text-xs">
+        <span className="focus:outline-none bg-indigo-700 transition duration-150 ease-in-out rounded text-white px-5 py-1 text-xs">
           Got it
-        </button>
+        </span>
       </div>
     </div>),
-  children:<button className="bg-blue-500 text-white px-4 py-2 cursor-pointer">Hover me</button>
+  children: <button className="bg-blue-500 text-white px-4 py-2">Hover me</button>
 };
