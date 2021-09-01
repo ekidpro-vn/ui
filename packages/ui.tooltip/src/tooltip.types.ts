@@ -3,4 +3,5 @@ export interface TooltipProps {
   tooltip: JSX.Element;
   darkMode?: boolean;
   children: React.ReactNode;
+  className?: string;
 }

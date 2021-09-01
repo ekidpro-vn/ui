@@ -4,7 +4,7 @@ import { TooltipProps } from './tooltip.types';
 import { css } from './utils/render-css';
 
 export const Tooltip: React.FC<TooltipProps> = (props) => {
-  const { position, tooltip, children, darkMode } = props;
+  const { position, tooltip, children, darkMode, className } = props;
   const [showTooltip, setShowTooltip] = useState<boolean>(false);
 
   const tmpTooltip = (
@@ -83,7 +83,9 @@ export const Tooltip: React.FC<TooltipProps> = (props) => {
   });
 
   return (
-    <TooltipStyle className={`flex-col md:flex-row flex items-center md:justify-center flex-wrap transform`}>
+    <TooltipStyle
+      className={`flex-col md:flex-row flex items-center md:justify-center flex-wrap transform ${className}`}
+    >
       <div
         className="relative mt-20 md:mt-0"
         onMouseEnter={() => setShowTooltip(true)}
