@@ -65,6 +65,13 @@ export function DefaultHelper() {
       const type = get(e, 'target.dataset.name');
 
       switch (type) {
+        case 'clear': {
+          action((state) => {
+            return { ...state, selected: [] };
+          });
+          break;
+        }
+
         case 'today': {
           action((state) => {
             const day = dayjs();
@@ -156,6 +163,15 @@ export function DefaultHelper() {
         onClick={onClick}
       >
         This year
+      </button>
+
+      <button
+        type="button"
+        data-name="clear"
+        className="bg-red-400 mt-3 text-white duration-300 w-full border p-1 rounded hover:bg-red-500"
+        onClick={onClick}
+      >
+        Clear
       </button>
     </div>
   );
