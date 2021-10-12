@@ -31,7 +31,11 @@ export function Popover(props: PopoverProps) {
   }, [state, numberOfItems]);
 
   useEffect(() => {
-    if (typeof onChange === 'undefined' || onChange === null || JSON.stringify(defaultV) === JSON.stringify(selected)) {
+    if (
+      typeof onChange === 'undefined' ||
+      onChange === null ||
+      (JSON.stringify(defaultV) === JSON.stringify(selected) && selected.length > 0)
+    ) {
       return () => {
         // nothing
       };
