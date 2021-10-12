@@ -86,11 +86,7 @@ export const Tooltip: React.FC<TooltipProps> = (props) => {
     <TooltipStyle
       className={`flex-col md:flex-row flex items-center md:justify-center flex-wrap transform ${className}`}
     >
-      <div
-        className="relative mt-20 md:mt-0"
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setShowTooltip(false)}
-      >
+      <div className="relative" onMouseEnter={() => setShowTooltip(true)} onMouseLeave={() => setShowTooltip(false)}>
         {getChildrenElement}
       </div>
     </TooltipStyle>

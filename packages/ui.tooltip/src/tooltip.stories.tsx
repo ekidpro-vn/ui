@@ -29,7 +29,9 @@ TooltipDefault.args = {
         </span>
       </div>
     </div>),
-  children: <button className="bg-blue-500 text-white px-4 py-2">Hover me</button>
+  children: <button className="bg-blue-500 text-white px-4 py-2">123<Tooltip tooltip={<div>ducnh</div>}>
+    abcd
+  </Tooltip></button>
 };
 
 export const TooltipLeft = TooltipComponent.bind({});
