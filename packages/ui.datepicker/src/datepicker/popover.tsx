@@ -5,7 +5,6 @@ import { DateContextProps, DatePickerContext, UpdatePickerContext } from '../con
 import { PopoverProps } from './datepicker.types';
 import { DefaultHelper } from './default-helper';
 
-
 export function Popover(props: PopoverProps) {
   const { numberOfItems = 2, month, year, onChange, defaultSelected, mode = 'range', helper } = props;
 
@@ -36,6 +35,11 @@ export function Popover(props: PopoverProps) {
       return () => {
         // nothing
       };
+    }
+
+    if (selected.length === 0) {
+      onChange([]);
+      return;
     }
 
     // YYYY-MM-DD
