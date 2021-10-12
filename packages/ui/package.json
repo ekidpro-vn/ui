@@ -1,6 +1,6 @@
 {
   "name": "@ekidpro/ui",
-  "version": "0.0.46",
+  "version": "0.0.47",
   "description": "> TODO: description",
   "author": "lamlv <lam.luongvan2305@gmail.com>",
   "homepage": "",
@@ -24,12 +24,12 @@
     "clean": "rm -rf lib"
   },
   "dependencies": {
-    "@ekidpro/ui.button": "^0.0.46",
-    "@ekidpro/ui.datepicker": "^0.0.46",
-    "@ekidpro/ui.loading": "^0.0.46",
-    "@ekidpro/ui.modal": "^0.0.46",
-    "@ekidpro/ui.portlet": "^0.0.46",
-    "@ekidpro/ui.textfield": "^0.0.46",
+    "@ekidpro/ui.button": "^0.0.47",
+    "@ekidpro/ui.datepicker": "^0.0.47",
+    "@ekidpro/ui.loading": "^0.0.47",
+    "@ekidpro/ui.modal": "^0.0.47",
+    "@ekidpro/ui.portlet": "^0.0.47",
+    "@ekidpro/ui.textfield": "^0.0.47",
     "clsx": "^1.1.1"
   },
   "devDependencies": {
