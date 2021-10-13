@@ -3,7 +3,7 @@ import React, { Dispatch, SetStateAction } from 'react';
 export type DateContextProps = {
   month?: number;
   year?: number;
-  selected: string[];
+  selected: string[] | undefined;
 };
 
 export const DatePickerContext = React.createContext<DateContextProps>({ selected: [] });

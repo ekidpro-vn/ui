@@ -39,6 +39,9 @@ export function Calendar(props: CalendarProps) {
       }
 
       action((state) => {
+        if (!state.selected) {
+          return { ...state, selected: [key] };
+        }
         const selected = state.selected.includes(key);
         if (mode === 'multi') {
           return {
@@ -157,10 +160,10 @@ export function Calendar(props: CalendarProps) {
         })}
         {daysOfMonth.map((val, index) => {
           const key = `${day.year()}-${day.month()}-${val ?? `blank_${index}`}`;
-          const selected = state.selected.includes(key);
+          const selected = !!(state.selected && state.selected.includes(key));
 
           let isBetween = false;
-          if (mode === 'range' && state.selected.length === 2 && val !== null) {
+          if (mode === 'range' && state.selected && state.selected.length === 2 && val !== null) {
             isBetween = dayjs(key).isBetween(state.selected[0], state.selected[1]);
           }
 

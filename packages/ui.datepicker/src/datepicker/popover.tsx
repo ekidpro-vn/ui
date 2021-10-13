@@ -10,7 +10,7 @@ export function Popover(props: PopoverProps) {
 
   const defaultV = useMemo(() => {
     if (!defaultSelected) {
-      return [];
+      return undefined;
     }
     return defaultSelected.map((e) => {
       return `${dayjs(e).year()}-${dayjs(e).month()}-${dayjs(e).date()}`;
@@ -37,10 +37,10 @@ export function Popover(props: PopoverProps) {
       };
     }
 
-    // if (selected.length === 0) {
-    //   onChange([]);
-    //   return;
-    // }
+    if (!selected || selected.length === 0) {
+      onChange([]);
+      return;
+    }
 
     // YYYY-MM-DD
     // MM using dayjs index, so we need to add 1 to make it like a normal day
