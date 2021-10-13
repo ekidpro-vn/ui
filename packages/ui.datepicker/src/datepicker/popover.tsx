@@ -31,20 +31,16 @@ export function Popover(props: PopoverProps) {
   }, [state, numberOfItems]);
 
   useEffect(() => {
-    if (
-      typeof onChange === 'undefined' ||
-      onChange === null ||
-      (JSON.stringify(defaultV) === JSON.stringify(selected) && selected.length > 0)
-    ) {
+    if (typeof onChange === 'undefined' || onChange === null || JSON.stringify(defaultV) === JSON.stringify(selected)) {
       return () => {
         // nothing
       };
     }
 
-    if (selected.length === 0) {
-      onChange([]);
-      return;
-    }
+    // if (selected.length === 0) {
+    //   onChange([]);
+    //   return;
+    // }
 
     // YYYY-MM-DD
     // MM using dayjs index, so we need to add 1 to make it like a normal day
