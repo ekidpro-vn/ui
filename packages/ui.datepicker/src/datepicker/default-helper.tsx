@@ -65,12 +65,12 @@ export function DefaultHelper() {
       const type = get(e, 'target.dataset.name');
 
       switch (type) {
-        case 'clear': {
-          action((state) => {
-            return { ...state, selected: [] };
-          });
-          break;
-        }
+        // case 'clear': {
+        //   action((state) => {
+        //     return { ...state, selected: [] };
+        //   });
+        //   break;
+        // }
 
         case 'today': {
           action((state) => {
@@ -165,14 +165,14 @@ export function DefaultHelper() {
         This year
       </button>
 
-      <button
+      {/* <button
         type="button"
         data-name="clear"
         className="bg-red-400 mt-3 text-white duration-300 w-full border p-1 rounded hover:bg-red-500"
         onClick={onClick}
       >
         Clear
-      </button>
+      </button> */}
     </div>
   );
 }
