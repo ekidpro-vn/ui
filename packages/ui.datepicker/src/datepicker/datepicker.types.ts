@@ -1,6 +1,7 @@
 export type Helper = {
   position: 'left' | 'right';
   element?: JSX.Element;
+  clearButton?: boolean;
 };
 
 export type DatePickerProps = {

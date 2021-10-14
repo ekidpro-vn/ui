@@ -66,11 +66,13 @@ export function Popover(props: PopoverProps) {
   return (
     <UpdatePickerContext.Provider value={setState}>
       <DatePickerContext.Provider value={state}>
-        {helper && helper.position === 'left' && (helper.element ?? <DefaultHelper />)}
+        {helper && helper.position === 'left' && (helper.element ?? <DefaultHelper clearButton={helper.clearButton} />)}
         {items.map((val) => (
           <Calendar key={val.toString()} day={val} mode={mode} />
         ))}
-        {helper && helper.position === 'right' && (helper.element ?? <DefaultHelper />)}
+        {helper &&
+          helper.position === 'right' &&
+          (helper.element ?? <DefaultHelper clearButton={helper.clearButton} />)}
       </DatePickerContext.Provider>
     </UpdatePickerContext.Provider>
   );
