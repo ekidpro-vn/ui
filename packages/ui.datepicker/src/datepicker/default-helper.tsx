@@ -7,7 +7,8 @@ import { css } from '../utils/css';
 
 dayjs.extend(quarterOfYear);
 
-export function DefaultHelper() {
+export function DefaultHelper(props: { clearButton?: boolean }) {
+  const { clearButton } = props;
   const { selected } = useContext(DatePickerContext);
   const action = useContext(UpdatePickerContext);
   const className = 'w-full border p-1 rounded hover:text-black';
@@ -165,14 +166,16 @@ export function DefaultHelper() {
         This year
       </button>
 
-      <button
-        type="button"
-        data-name="clear"
-        className="bg-red-400 mt-3 text-white duration-300 w-full border p-1 rounded hover:bg-red-500"
-        onClick={onClick}
-      >
-        Clear
-      </button>
+      {clearButton && (
+        <button
+          type="button"
+          data-name="clear"
+          className="bg-red-400 mt-3 text-white duration-300 w-full border p-1 rounded hover:bg-red-500"
+          onClick={onClick}
+        >
+          Clear
+        </button>
+      )}
     </div>
   );
 }

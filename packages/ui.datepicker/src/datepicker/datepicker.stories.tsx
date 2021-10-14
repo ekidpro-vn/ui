@@ -43,7 +43,8 @@ export const DatePickerWithRightHelper: Story<ComponentProps<typeof DatePicker>>
 DatePickerWithRightHelper.storyName = "With helper - position right"
 DatePickerWithRightHelper.args = {
   helper: {
-    position: 'right'
+    position: 'right',
+    clearButton: true
   }
 }
 
