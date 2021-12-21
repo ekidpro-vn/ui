@@ -15,6 +15,15 @@ const Datepicker: Story<ComponentProps<typeof DatePicker>> = (args: any) => {
 export const DefaultComponent = Datepicker.bind({});
 DefaultComponent.storyName = 'Default input';
 
+export const DatePickerWithDefaultSelection = Datepicker.bind({})
+DatePickerWithDefaultSelection.storyName = "Default select"
+DatePickerWithDefaultSelection.args = {
+  mode: 'single',
+  defaultDate: [new Date()],
+  onChange: (v) => alert(v)
+}
+
+
 export const DatePickerWithCustomInput = Datepicker.bind({})
 DatePickerWithCustomInput.storyName = "Custom Input"
 DatePickerWithCustomInput.args = {
