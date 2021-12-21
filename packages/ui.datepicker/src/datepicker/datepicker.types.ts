@@ -7,6 +7,7 @@ export type Helper = {
 export type DatePickerProps = {
   InputComponent?: JSX.Element;
   mode?: 'single' | 'multi' | 'range';
+  defaultDate?: Date[];
   zIndex?: number;
   helper?: Helper;
   onChange?: (selected: Date[]) => void;

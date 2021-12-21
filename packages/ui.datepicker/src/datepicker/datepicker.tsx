@@ -4,7 +4,14 @@ import { Placement } from 'tippy.js';
 import { DatePickerProps } from './datepicker.types';
 import { Popover } from './popover';
 
-export function DatePicker({ InputComponent: InputElement, onChange, mode, zIndex, helper }: DatePickerProps) {
+export function DatePicker({
+  InputComponent: InputElement,
+  onChange,
+  mode,
+  zIndex,
+  helper,
+  defaultDate,
+}: DatePickerProps) {
   const [calendarVisible, setCalendarVisible] = useState<boolean>(false);
   const inputRef = useRef<HTMLDivElement>(null);
   const popoverRef = useRef<HTMLDivElement>(null);
@@ -46,11 +53,11 @@ export function DatePicker({ InputComponent: InputElement, onChange, mode, zInde
           key={`${mode}_${JSON.stringify(attrs)}`}
           {...attrs}
         >
-          <Popover mode={mode} onChange={onChange} helper={helper} />
+          <Popover mode={mode} onChange={onChange} helper={helper} defaultSelected={defaultDate} />
         </div>
       );
     },
-    [mode, onChange, zIndex, helper]
+    [mode, onChange, zIndex, helper, defaultDate]
   );
 
   return (
